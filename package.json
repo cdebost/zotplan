@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src -s -D -d dist",
     "start": "node dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,10 @@
     "babel-cli": "^6.22.2",
     "babel-polyfill": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
-    "babel-register": "^6.22.0"
+    "babel-register": "^6.22.0",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1"
   }
 }
