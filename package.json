@@ -1,0 +1,22 @@
+{
+  "name": "zotplan",
+  "version": "0.0.0",
+  "description": "An application for making multi-year plans for UCI programs, with checks for prerequisites, major requirements, course availability, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cdebost/zotplan.git"
+  },
+  "author": "Corentin Debost",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdebost/zotplan/issues"
+  },
+  "homepage": "https://github.com/cdebost/zotplan#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
