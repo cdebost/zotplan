@@ -2,8 +2,10 @@
   "name": "zotplan",
   "version": "0.0.0",
   "description": "An application for making multi-year plans for UCI programs, with checks for prerequisites, major requirements, course availability, etc.",
-  "main": "index.js",
+  "main": "dist",
   "scripts": {
+    "build": "babel src -s -D -d dist",
+    "start": "node dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,11 @@
   "homepage": "https://github.com/cdebost/zotplan#readme",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-register": "^6.22.0"
   }
 }
