@@ -1,0 +1,15 @@
+{
+    "COMPSCI": {
+        "name": "COMPSCI",
+        "catalogueUrl": "http://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/departmentofcomputerscience"
+    },
+    "IN4MATX": {
+        "name": "IN4MATX",
+        "catalogueUrl": "http://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/departmentofinformatics"
+    },
+    "STATS": {
+        "name": "STATS",
+        "catalogueUrl": "http://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/departmentofstatistics"
+    }
+}
+
