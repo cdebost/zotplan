@@ -3,12 +3,12 @@
 import express from 'express'
 import http from 'http'
 
+import routes from './routes'
+
 let app = express()
 app.server = http.createServer(app)
 
-app.get('/', (req, res) => {
-    res.send('Hello world');
-})
+routes(app)
 
 app.server.listen(process.env.PORT || 8000)
 console.log(`Server running on ${app.server.address().port}`)
