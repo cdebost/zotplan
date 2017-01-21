@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/cdebost/zotplan#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "pg": "^6.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",

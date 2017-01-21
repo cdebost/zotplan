@@ -2,11 +2,28 @@
 
 import express from 'express'
 
-const router = express.Router()
+export default ({db}) => {
+    const router = express.Router()
 
-router.get('/', (req, res) => {
-   res.send('Hello courses') 
-})
+    router.get('/', (req, res) => {
+        db.connect((err, client, done) => {
+            if (err) {
+                console.error(err)
+                res.sendStatus(405)
+            }
+            client.query('SELECT * from course', (err, result) => {
+                done()
 
-export default router
+                if (err) {
+                    console.error(err)
+                    res.sendStatus(405)
+                }
+
+                res.json(result.rows)
+            })
+        })
+    })
+
+    return router
+}
 
