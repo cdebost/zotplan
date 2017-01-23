@@ -6,6 +6,10 @@ import path from 'path'
 
 export default ({app, db}) => {
     app.use('/api', api({db}))
-    app.use(express.static(path.join(__dirname, '../public')))
+    if (process.env.ENVIRONMENT === "production") {
+        app.use(express.static(path.join(__dirname, '../public')))
+    } else {
+        app.use(express.static(path.join(__dirname, '../../src/public')))
+    }
 }
 
