@@ -23,7 +23,7 @@ describe('routing', () => {
 
     it('responds for public files', done => {
         request(server)
-            .get('/placeholder.json')
+            .get('/favicon.ico')
             .expect(200, done)
     })
 
