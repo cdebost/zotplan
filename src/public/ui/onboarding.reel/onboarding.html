@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="onboarding.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "title": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "title"},
+                "value": "ZotPlan"
+            }
+        },
+
+        "usernameInput": {
+            "prototype": "montage/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "usernameInput"}
+            }
+        },
+
+        "passwordInput": {
+            "prototype": "montage/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "passwordInput"}
+            }
+        },
+
+        "signInButton": {
+            "prototype": "ui/base/button.reel",
+            "properties": {
+                "element": {"#": "signInButton"},
+                "label": "Sign In",
+                "skin": "green"
+            }
+        },
+
+        "guestButton": {
+            "prototype": "ui/base/button.reel",
+            "properties": {
+                "element": {"#": "guestButton"},
+                "label": "Continue as a Guest"
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Onboarding">
+        <div class="Onboarding-card">
+            <div data-montage-id="title"></div>
+            <div class="Onboarding-card-content">
+                <p data-montage-id="message">
+                    Welcome!
+                    Sign in to save your plan data and connect with friends.
+                    You may continue without signing in for now, but your data will not be saved unless you create an account or sign in.
+                </p>
+                <label for="username">Username or email:</label>
+                <input id="username" data-montage-id="usernameInput" type="email" class="Onboarding-field">
+                <label for="password">Password:</label>
+                <input id="password" data-montage-id="passwordInput" type="password" class="Onboarding-field">
+            </div>
+            <div data-montage-id="signInButton" class="Onboarding-button"></div>
+            <div data-montage-id="guestButton" class="Onboarding-button"></div>
+        </div>
+    </div>
+</body>
+</html>

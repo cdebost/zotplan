@@ -1,0 +1,27 @@
+.Button {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border: none;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: gray;
+}
+
+.Button:active {
+    position: relative;
+    top: 1px;
+}
+
+.Button:focus {
+    outline: none;
+}
+
+.Button--green {
+    box-shadow: inset 0px 1px 0px 0px #9ACC85;
+    background: linear-gradient(to bottom, #74AD5A 5%, #68A54B 100%);
+    /*border: 1px solid #3B6E22;*/
+}
+
