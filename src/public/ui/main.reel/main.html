@@ -12,12 +12,32 @@
                 "properties": {
                     "element": {"#": "main"}
                 }
+            },
+
+            "appSubstitution": {
+                "prototype": "montage/ui/substitution.reel",
+                "properties": {
+                    "element": {"#": "appSubstitution"}
+                },
+                "bindings": {
+                    "switchValue": {"<-": "@owner.application.delegate.sessionToken.defined() ? 'app' : 'onboarding'"}
+                }
+            },
+
+            "onboarding": {
+                "prototype": "ui/onboarding.reel",
+                "properties": {
+                    "element": {"#": "onboarding"}
+                }
             }
         }
     </script>
 </head>
 <body>
     <div data-montage-id="main" data-montage-skin="light" class="Main">
+        <div data-montage-id="appSubstitution">
+            <div data-montage-id="onboarding" data-arg="onboarding"></div>
+        </div>
     </div>
 </body>
 </html>
