@@ -25,12 +25,26 @@
     <script type="text/montage-serialization">
     {
         "owner": {
-            "prototype": "montage/ui/loader.reel"
+            "prototype": "ui/loader.reel",
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "zotPlanController": {
+            "prototype": "core/zotplan-controller"
+        },
+
+        "application": {
+            "prototype": "montage/core/application",
+            "properties": {
+                "delegate": {"@": "zotPlanController"}
+            }
         }
     }
     </script>
 </head>
 <body>
-    <span class="loading"></span>
+    <div data-montage-id="owner"></div>
 </body>
 </html>
