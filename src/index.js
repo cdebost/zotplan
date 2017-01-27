@@ -2,11 +2,12 @@
 
 import express from 'express'
 import http from 'http'
-import pg from 'pg'
 
+import DB from './db'
+import models from './models'
 import routes from './routes'
 
-let app = express()
+const app = express()
 app.server = http.createServer(app)
 
 const dbConf = {
@@ -15,9 +16,10 @@ const dbConf = {
     max: 10,
     idleTimeoutMillis: 30000
 }
-const db = new pg.Pool(dbConf)
 
-routes({app, db})
+const db = new DB(dbConf)
+models({db})
+routes({app})
 
 app.server.listen(process.env.PORT || 8000)
 console.log(`Server running on ${app.server.address().port}`)
