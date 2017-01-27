@@ -4,7 +4,7 @@
   "description": "An application for making multi-year plans for UCI programs, with checks for prerequisites, major requirements, course availability, etc.",
   "main": "dist",
   "scripts": {
-    "build": "babel src -s -D -d dist --ignore src/public && cp -rf src/public dist/",
+    "build": "babel src -s -D -d dist",
     "start": "node dist",
     "test": "istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill"
   },
