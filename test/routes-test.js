@@ -1,15 +1,22 @@
 'use strict'
 
 import request from 'supertest'
+import App from '../src/app'
 
 describe('routing', () => {
-    let server
+    let app
     beforeEach(() => {
-        server = require('../src')
+        app = App({
+            environment: 'test'
+        })
+    })
+
+    afterEach(() => {
+        app.server.close()
     })
 
     it('responds to / with the public index.html', done => {
-        request(server)
+        request(app)
             .get('/')
             .expect(200)
             .expect('Content-Type', 'text/html; charset=UTF-8')
@@ -22,19 +29,19 @@ describe('routing', () => {
     })
 
     it('responds for public files', done => {
-        request(server)
+        request(app)
             .get('/favicon.ico')
             .expect(200, done)
     })
 
     it('responds to /api', done => {
-        request(server)
+        request(app)
             .get('/api')
             .expect(200, done)
     })
 
     it('404s any invalid routes', done => {
-        request(server)
+        request(app)
             .get('/courses')
             .expect(404, done)
     })

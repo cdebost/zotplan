@@ -1,6 +1,6 @@
 import User from '../../src/models/user'
 import { expect } from 'chai'
-import { _db } from '../../src'
+import { _db } from '../../src/app'
 
 describe('User', () => {
     it('can be found by id', done => {

@@ -1,6 +1,6 @@
 import GoogleUser from '../../src/models/google-user'
 import { expect } from 'chai'
-import { _db } from '../../src'
+import { _db } from '../../src/app'
 
 describe('GoogleUser', () => {
     

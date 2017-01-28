@@ -1,15 +1,22 @@
 'use strict'
 
 import request from 'supertest'
+import App from '../src/app'
 
 describe('courses', () => {
-    let server;
+    let app
     beforeEach(() => {
-        server = require('../src')
+        app = App({
+            environment: 'test'
+        })
+    })
+
+    afterEach(() => {
+        app.server.close()
     })
 
     it('responds to /api/courses with all the courses', done => {
-        request(server)
+        request(app)
             .get('/api/courses')
             .expect(200)
             .expect('Content-Type', /json/)

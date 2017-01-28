@@ -1,40 +1,21 @@
 'use strict'
 
-import express from 'express'
-import http from 'http'
+import App from './app'
+import GoogleAuth from 'google-auth-library'
 
-import DB from './db'
-import models from './models'
-import routes from './routes'
+const GOOGLE_CLIENT_ID = '11956410191-h0f137migio4rpp2jng7k80i2e3v4h60.apps.googleusercontent.com'
+const googleAuth = new GoogleAuth()
 
-const app = express()
-app.server = http.createServer(app)
-
-if (!process.env.ENVIRONMENT) {
-    process.env.ENVIRONMENT = 'staging'
+const config = {
+    environment: process.env.ENVIRONMENT || 'development',
+    port: 8000,
+    googleClientId: GOOGLE_CLIENT_ID,
+    googleClient: new googleAuth.OAuth2(GOOGLE_CLIENT_ID, '', '')
 }
 
-const dbConf = {
-    database: 'zotplan_' + process.env.ENVIRONMENT,
-    host: '/var/run/postgresql',
-    max: 10,
-    idleTimeoutMillis: 30000
-}
+const app = App(config)
 
-const db = new DB(dbConf)
-models({db})
-routes({app})
-
-app.server.listen(process.env.PORT || 8000)
 console.log(`Server running on ${app.server.address().port}`)
 
 export default app
-
-// For testing purposes only
-export const _db = db
-
-if (typeof module !== 'undefined') {
-    module.exports = app
-    module.exports._db = db
-}
 
