@@ -1,3 +1,13 @@
+CREATE TABLE zotplan_user (
+    id VARCHAR(50) PRIMARY KEY,
+    account_type VARCHAR(15) NOT NULL,
+    name VARCHAR(80) NOT NULL,
+    email VARCHAR(150),
+    password_hash VARCHAR(50),
+    created TIMESTAMP NOT NULL,
+    last_signin TIMESTAMP
+);
+
 CREATE TABLE course (
     id VARCHAR(15) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
