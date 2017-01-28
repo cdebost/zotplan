@@ -1,7 +1,8 @@
 INSERT INTO zotplan_user VALUES
-    ('id1', 'type1', 'First User', NULL, CURRENT_TIMESTAMP, NULL),
-    ('id2', 'type2', 'Second User', NULL, CURRENT_TIMESTAMP, NULL),
-    ('id3', 'type3', 'Third User', NULL, CURRENT_TIMESTAMP, NULL);
+    ('id1', 'type1', 'First User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
+    ('id2', 'type2', 'Second User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
+    ('id3', 'type3', 'Third User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
+    ('go_id1', 'google', 'Google User', NULL, NULL, CURRENT_TIMESTAMP, NULL);
 
 INSERT INTO school VALUES
     ('School of Computer Science'), ('School of Engineering'), ('School of Statistics');
