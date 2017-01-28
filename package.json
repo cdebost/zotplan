@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src -s -D -d dist",
     "start": "node dist",
-    "test": "istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill"
+    "test": "ENVIRONMENT=test istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/cdebost/zotplan#readme",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.14.0",
+    "google-auth-library": "^0.10.0",
     "pg": "^6.1.2"
   },
   "devDependencies": {

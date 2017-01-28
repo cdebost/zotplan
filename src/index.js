@@ -10,8 +10,12 @@ import routes from './routes'
 const app = express()
 app.server = http.createServer(app)
 
+if (!process.env.ENVIRONMENT) {
+    process.env.ENVIRONMENT = 'staging'
+}
+
 const dbConf = {
-    database: process.env.ENVIRONMENT === 'production' ? 'zotplan' : 'zotplantest',
+    database: 'zotplan_' + process.env.ENVIRONMENT,
     host: '/var/run/postgresql',
     max: 10,
     idleTimeoutMillis: 30000
@@ -28,4 +32,7 @@ export default app
 if (typeof module !== 'undefined') {
     module.exports = app
 }
+
+// For testing purposes only
+export { db as _db }
 
