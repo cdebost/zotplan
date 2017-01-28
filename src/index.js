@@ -29,10 +29,12 @@ app.server.listen(process.env.PORT || 8000)
 console.log(`Server running on ${app.server.address().port}`)
 
 export default app
-if (typeof module !== 'undefined') {
-    module.exports = app
-}
 
 // For testing purposes only
-export { db as _db }
+export const _db = db
+
+if (typeof module !== 'undefined') {
+    module.exports = app
+    module.exports._db = db
+}
 
