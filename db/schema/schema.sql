@@ -3,7 +3,7 @@ CREATE TABLE zotplan_user (
     account_type VARCHAR(15) NOT NULL,
     name VARCHAR(80) NOT NULL,
     email VARCHAR(150),
-    password_hash VARCHAR(50),
+    password_hash VARCHAR(100),
     created TIMESTAMP NOT NULL,
     last_signin TIMESTAMP
 );

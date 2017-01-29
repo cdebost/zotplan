@@ -1,8 +1,8 @@
 INSERT INTO zotplan_user VALUES
-    ('id1', 'type1', 'First User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
-    ('id2', 'type2', 'Second User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
-    ('id3', 'type3', 'Third User', NULL, NULL, CURRENT_TIMESTAMP, NULL),
-    ('go_id1', 'google', 'Google User', NULL, NULL, CURRENT_TIMESTAMP, NULL);
+    ('id1', 'zotplan', 'First User', 'first@zotplan.com', '$2a$10$y293.XA18EwDjqZwMZ4Cm.7fhp288pD/PeUwYagrxMngK58Y6l1Vm', CURRENT_TIMESTAMP, NULL),
+    ('id2', 'zotplan', 'Second User', 'second@zotplan.com', NULL, CURRENT_TIMESTAMP, NULL),
+    ('id3', 'zotplan', 'Third User', 'third@zotplan.com', NULL, CURRENT_TIMESTAMP, NULL),
+    ('go_id1', 'google', 'Google User', 'first@google.com', NULL, CURRENT_TIMESTAMP, NULL);
 
 INSERT INTO school VALUES
     ('School of Computer Science'), ('School of Engineering'), ('School of Statistics');
