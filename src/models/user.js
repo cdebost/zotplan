@@ -22,5 +22,13 @@ export default class User extends Model {
                 return new User(result[0])
             })
     }
+
+    static searchByEmail(email) {
+        const self = this
+        return this.db.query('SELECT * FROM zotplan_user WHERE email = $1::VARCHAR(150)', [email])
+            .then(results => {
+                return results.map(result => new User(result))
+            })
+    }
 }
 
