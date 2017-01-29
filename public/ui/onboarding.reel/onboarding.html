@@ -9,6 +9,10 @@
             "properties": {
                 "element": {"#": "owner"}
             },
+            "bindings": {
+                "username": {"<->": "@usernameInput.value"},
+                "password": {"<->": "@passwordInput.value"}
+            },
             "listeners": [
                 {
                     "type": "action",

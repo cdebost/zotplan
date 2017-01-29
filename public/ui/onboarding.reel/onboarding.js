@@ -56,6 +56,23 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
         }
     },
 
+    handleSignInButtonAction: {
+        value: function () {
+            var self = this;
+            return this.zotplanAuthService.signIn(this.username, this.password)
+                .then(function () {
+                    console.log("Signed in");
+                })
+                .catch(function (err) {
+                    self.errorMessage = err.message;
+                })
+                .finally(function () {
+                    self.username = "";
+                    self.password = "";
+                })
+        }
+    },
+
     handleSignInWithGoogleButtonAction: {
         value: function () {
             var self = this;
@@ -71,7 +88,7 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
                 .then(function () {
                     console.log("Signed in")
                 }, function (err) {
-                    self._errorMessage = err.message;
+                    self.errorMessage = err.message;
                 })
         }
     },
@@ -79,7 +96,7 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
     handleGoogleSignInError: {
         value: function (e) {
             var error = e.detail;
-            this._errorMessage = error.message;
+            this.errorMessage = error.message;
             console.error(error);
         }
     }
