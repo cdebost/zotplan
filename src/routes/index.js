@@ -21,7 +21,6 @@ export default ({app, config}) => {
 
     app.use('/api', (req, res, next) => {
         if (req.session && req.session.userId) {
-            console.log('authed, user id is', req.session.userId)
             return next()
         } else {
             return res.sendStatus(401)

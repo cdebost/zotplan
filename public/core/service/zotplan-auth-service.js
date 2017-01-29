@@ -15,7 +15,7 @@ exports.ZotplanAuthService = Montage.specialize({
                     if (req.status !== 200) {
                         return reject(new Error("Unable to sign in with Google"));
                     }
-                    resolve(JSON.parse(req.response).sessionKey);
+                    resolve();
                 };
                 req.onerror = function () {
                     reject(req.response);
