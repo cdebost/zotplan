@@ -2,7 +2,8 @@
  * @module ui/onboarding.reel
  */
 var Component = require("montage/ui/component").Component,
-    GoogleAuthService = require("core/service/google-auth-service").GoogleAuthService;
+    GoogleAuthService = require("core/service/google-auth-service").GoogleAuthService,
+    ZotplanAuthService = require("core/service/zotplan-auth-service").ZotplanAuthService;
 
 /**
  * @class Onboarding
@@ -16,6 +17,15 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
 
     _errorMessage: {
         value: null
+    },
+
+    zotplanAuthService: {
+        get: function () {
+            if (!this._zotplanAuthService) {
+                this._zotplanAuthService = new ZotplanAuthService();
+            }
+            return this._zotplanAuthService;
+        }
     },
 
     enterDocument: {
@@ -55,8 +65,14 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
 
     handleDidGetGoogleIdToken: {
         value: function (e) {
-            var token = e.detail;
-            console.log(token);
+            var self = this,
+                token = e.detail;
+            this.zotplanAuthService.signInWithGoogle(token)
+                .then(function () {
+                    console.log("Signed in")
+                }, function (err) {
+                    self._errorMessage = err.message;
+                })
         }
     },
 

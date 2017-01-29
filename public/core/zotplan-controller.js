@@ -22,6 +22,11 @@ exports.ZotplanController = Target.specialize({
     willFinishLoading: {
         value: function (app) {
             var self = this;
+
+            app.config = {
+                apiBaseUrl: "/api/"
+            };
+
             Promise.delay(2000)
                 .then(this._loadGoogleAPI.bind(this))
                 .timeout(10000)
