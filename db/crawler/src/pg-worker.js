@@ -2,7 +2,7 @@ const pg = require('pg')
 const SQL = require('sql-template-strings')
 
 const pgconfig = {
-    database: 'zotplan',
+    database: 'zotplan_development',
     host: '/var/run/postgresql',
     max: 10,
     idleTimeoutMillis: 30000
