@@ -2,10 +2,6 @@ import Model from './model'
 
 export default class User extends Model {
 
-    createSessionKey() {
-        return 'fake'
-    }
-
     save() {
         return Model.db.query('UPDATE zotplan_user SET ' +
                 'name = $1::VARCHAR(80), email = $2::VARCHAR(150)',
