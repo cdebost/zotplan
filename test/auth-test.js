@@ -30,16 +30,16 @@ describe('auth', () => {
         app.server.close()
     })
 
-    it('responds to /api/auth/google and accepts valid tokens', done => {
+    it('responds to /auth/google and accepts valid tokens', done => {
         request(app)
-            .post('/api/auth/google')
+            .post('/auth/google')
             .send({ token: 'test token' })
             .expect(200, done)
     })
 
     it('denies invalid tokens', done => {
         request(app)
-            .post('/api/auth/google')
+            .post('/auth/google')
             .send({ token: 'invalid token' })
             .expect(400, done)
     })

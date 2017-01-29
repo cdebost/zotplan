@@ -1,6 +1,7 @@
 'use strict'
 
 import express from 'express'
+import session from 'express-session'
 
 import GoogleUser from '../../models/google-user'
 
@@ -17,14 +18,14 @@ export default ({config}) => {
             const payload = login.getPayload()
             GoogleUser.find('go_' + payload['sub'], payload)
                 .then(user => {
-                    return user.createSessionKey()
+                    req.session.userId = user.id
                 })
                 .then(key => {
-                    res.send({ sessionKey: key })
+                    res.sendStatus(200)
                 })
                 .catch(err => {
                     console.error(err)
-                    res.status(400)
+                    res.sendStatus(400)
                 })
         });
     })
