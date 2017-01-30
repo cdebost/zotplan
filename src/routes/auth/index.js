@@ -30,7 +30,7 @@ export default ({config}) => {
                     throw new Error('Invalid password')
                 }
                 req.session.userId = user.id
-                res.sendStatus(200)
+                res.send(user.safeProps)
             })
             .catch(err => {
                 res.status(400).send({
@@ -48,9 +48,7 @@ export default ({config}) => {
             GoogleUser.find('go_' + payload['sub'], payload)
                 .then(user => {
                     req.session.userId = user.id
-                })
-                .then(key => {
-                    res.sendStatus(200)
+                    res.send(user.safeProps)
                 })
                 .catch(err => {
                     console.error(err)

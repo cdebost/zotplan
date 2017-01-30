@@ -2,6 +2,14 @@ import Model from './model'
 
 export default class User extends Model {
 
+    get safeProps() {
+        return {
+            id: this.id,
+            name: this.name,
+            email: this.email
+        }
+    }
+
     save() {
         return Model.db.query('UPDATE zotplan_user SET ' +
                 'name = $1::VARCHAR(80), email = $2::VARCHAR(150)' +

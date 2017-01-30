@@ -16,6 +16,18 @@ describeApiTest('auth', request => {
                 .expect(200, done)
         })
 
+        it('returns safe user information', done => {
+            request()
+                .post('/auth/zotplan')
+                .send({ email: 'first@zotplan.com', password: 'password' })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.email).to.equal('first@zotplan.com')
+                    expect(res.body.password).to.equal(void 0)
+                    done(err)
+                })
+        })
+
         it('denies an invalid email', done => {
             request()
                 .post('/auth/zotplan')
@@ -56,6 +68,17 @@ describeApiTest('auth', request => {
                 .post('/auth/google')
                 .send({ token: 'test token' })
                 .expect(200, done)
+        })
+
+        it('returns safe user information', done => {
+            request()
+                .post('/auth/google')
+                .send({ token: 'test token' })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.email).to.equal('user@google.com')
+                    done(err)
+                })
         })
 
         it('denies invalid tokens', done => {
