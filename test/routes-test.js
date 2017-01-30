@@ -1,22 +1,10 @@
 'use strict'
 
-import request from 'supertest'
-import App from '../src/app'
+import { describeApiTest } from './utils'
 
-describe('routing', () => {
-    let app
-    beforeEach(() => {
-        app = App({
-            environment: 'test'
-        })
-    })
-
-    afterEach(() => {
-        app.server.close()
-    })
-
+describeApiTest('routing', request => {
     it('responds to / with the public index.html', done => {
-        request(app)
+        request()
             .get('/')
             .expect(200)
             .expect('Content-Type', 'text/html; charset=UTF-8')
@@ -29,19 +17,19 @@ describe('routing', () => {
     })
 
     it('responds for public files', done => {
-        request(app)
+        request()
             .get('/favicon.ico')
             .expect(200, done)
     })
 
     it('responds to /api', done => {
-        request(app)
+        request()
             .get('/api')
             .expect(200, done)
     })
 
     it('404s any invalid routes', done => {
-        request(app)
+        request()
             .get('/courses')
             .expect(404, done)
     })

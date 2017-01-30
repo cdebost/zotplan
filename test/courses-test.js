@@ -1,22 +1,10 @@
 'use strict'
 
-import request from 'supertest'
-import App from '../src/app'
+import { describeApiTest } from './utils'
 
-describe('courses', () => {
-    let app
-    beforeEach(() => {
-        app = App({
-            environment: 'test'
-        })
-    })
-
-    afterEach(() => {
-        app.server.close()
-    })
-
+describeApiTest('courses', request => {
     it('responds to /api/courses with all the courses', done => {
-        request(app)
+        request()
             .get('/api/courses')
             .expect(200)
             .expect('Content-Type', /json/)
