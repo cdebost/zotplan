@@ -43,7 +43,7 @@ describe('DB', () => {
         })
 
         it('defends against SQL injection', done => {
-            db.query('SELECT * FROM course WHERE id = $1::TEXT', ['"one"; DROP TABLE course; --;'])
+            db.query('SELECT * FROM course WHERE id = $1::TEXT', ['"one"; DROP TABLE course; --'])
                 .then(results => {
                     expect(results.length).to.equal(0)
                 }, err => Function.noop)
