@@ -16,6 +16,7 @@ exports.ZotplanAuthService = Montage.specialize({
                         const response = JSON.parse(req.response);
                         return reject(new Error(response.error));
                     }
+                    application.config.isSignedIn = true;
                     resolve();
                 };
                 req.onerror = function () {

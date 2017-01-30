@@ -1,0 +1,17 @@
+.Menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 56px;
+    background-color: white;
+    z-index: 15;
+    box-shadow: 0 0 4px rgba(0,0,0,.28);
+    overflow-y: auto;
+    transform: translateX(0);
+    transition: transform 0.5s ease;
+}
+
+.Menu.hidden {
+    transform: translateX(-100%);
+}

@@ -24,6 +24,8 @@ exports.ZotplanController = Target.specialize({
             var self = this;
 
             app.config = {
+                appName: "Zotplan",
+                isSignedIn: false,
                 apiBaseUrl: "/api/"
             };
 

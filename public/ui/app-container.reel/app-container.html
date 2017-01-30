@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="app-container.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "menu": {"@": "menu"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+
+        "toolbar": {
+            "prototype": "ui/toolbar.reel",
+            "properties": {
+                "element": {"#": "toolbar"}
+            },
+            "listeners": [
+                {
+                    "type": "hamburgerPressed",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+
+        "menu": {
+            "prototype": "ui/menu.reel",
+            "properties": {
+                "element": {"#": "menu"}
+            }
+        },
+
+        "succession": {
+            "prototype": "montage/ui/succession.reel",
+            "properties": {
+                "element": {"#": "succession"}
+            }
+        },
+
+        "home": {
+            "prototype": "ui/home.reel",
+            "properties": {
+                "element": {"#": "home"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="AppContainer">
+        <header data-montage-id="toolbar"></header>
+        <div data-montage-id="menu"></div>
+        <div data-montage-id="succession">
+            <div data-montage-id="home" data-arg="content"></div>
+        </div>
+    </div>
+</body>
+</html>

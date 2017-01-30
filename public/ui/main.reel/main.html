@@ -20,7 +20,7 @@
                     "element": {"#": "appSubstitution"}
                 },
                 "bindings": {
-                    "switchValue": {"<-": "@owner.application.delegate.sessionToken.defined() ? 'app' : 'onboarding'"}
+                    "switchValue": {"<-": "@owner.application.config.isSignedIn ? 'app' : 'onboarding'"}
                 }
             },
 
@@ -28,6 +28,13 @@
                 "prototype": "ui/onboarding.reel",
                 "properties": {
                     "element": {"#": "onboarding"}
+                }
+            },
+
+            "appContainer": {
+                "prototype": "ui/app-container.reel",
+                "properties": {
+                    "element": {"#": "appContainer"}
                 }
             }
         }
@@ -37,6 +44,7 @@
     <div data-montage-id="main" data-montage-skin="light" class="Main">
         <div data-montage-id="appSubstitution">
             <div data-montage-id="onboarding" data-arg="onboarding"></div>
+            <div data-montage-id="appContainer" data-arg="app"></div>
         </div>
     </div>
 </body>

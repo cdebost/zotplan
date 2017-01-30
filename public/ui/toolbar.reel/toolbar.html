@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="toolbar.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+
+        "hamburgerButton": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "hamburgerButton"},
+                "label": "="
+            }
+        },
+
+        "title": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "title"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.application.config.appName"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Toolbar">
+        <div data-montage-id="hamburgerButton" class="Toolbar-hamburger"></div>
+        <div data-montage-id="title" class="Toolbar-title"></div>
+    </div>
+</body>
+</html>
