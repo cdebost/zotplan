@@ -2,8 +2,7 @@
  * @module ui/onboarding.reel
  */
 var Component = require("montage/ui/component").Component,
-    GoogleAuthService = require("core/service/google-auth-service").GoogleAuthService,
-    ZotplanAuthService = require("core/service/zotplan-auth-service").ZotplanAuthService;
+    GoogleAuthService = require("core/service/google-auth-service").GoogleAuthService;
 
 /**
  * @class Onboarding
@@ -17,15 +16,6 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
 
     _errorMessage: {
         value: null
-    },
-
-    zotplanAuthService: {
-        get: function () {
-            if (!this._zotplanAuthService) {
-                this._zotplanAuthService = new ZotplanAuthService();
-            }
-            return this._zotplanAuthService;
-        }
     },
 
     enterDocument: {
@@ -59,15 +49,14 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
     handleSignInButtonAction: {
         value: function () {
             var self = this;
-            return this.zotplanAuthService.signIn(this.username, this.password)
+            this.application.delegate.signIn(this.username, this.password)
                 .then(function () {
-                    console.log("Signed in");
+                    self.username = "";
                 })
                 .catch(function (err) {
                     self.errorMessage = err.message;
                 })
                 .finally(function () {
-                    self.username = "";
                     self.password = "";
                 })
         }
@@ -84,10 +73,8 @@ exports.Onboarding = Component.specialize(/** @lends Onboarding# */ {
         value: function (e) {
             var self = this,
                 token = e.detail;
-            this.zotplanAuthService.signInWithGoogle(token)
-                .then(function () {
-                    console.log("Signed in")
-                }, function (err) {
+            this.application.delegate.signInWithGoogle(token)
+                .catch(function (err) {
                     self.errorMessage = err.message;
                 })
         }

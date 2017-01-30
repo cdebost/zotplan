@@ -1,7 +1,8 @@
 /**
  * @module core/zotplan-controller
  */
-var Target = require("montage/core/target").Target;
+var Target = require("montage/core/target").Target,
+    ZotplanAuthService = require("core/service/zotplan-auth-service").ZotplanAuthService;
 
 /**
  * @class ZotplanController
@@ -13,9 +14,32 @@ exports.ZotplanController = Target.specialize({
         value: false
     },
 
-    sessionToken: {
+    _zotplanAuthService: {
         get: function () {
-            return null;
+            if (!this.__zotplanAuthService) {
+                this.__zotplanAuthService = new ZotplanAuthService();
+            }
+            return this.__zotplanAuthService;
+        }
+    },
+
+    signIn: {
+        value: function (email, password) {
+            var self = this;
+            return this._zotplanAuthService.signIn(email, password)
+                .then(function (user) {
+                    self.application.config.user = user;
+                })
+        }
+    },
+
+    signInWithGoogle: {
+        value: function (googleServerToken) {
+            var self = this;
+            return this._zotplanAuthService.signInWithGoogle(googleServerToken)
+                .then(function (user) {
+                    self.application.config.user = user;
+                })
         }
     },
     
@@ -23,10 +47,12 @@ exports.ZotplanController = Target.specialize({
         value: function (app) {
             var self = this;
 
+            this.application = app;
             app.config = {
                 appName: "Zotplan",
                 isSignedIn: false,
-                apiBaseUrl: "/api/"
+                apiBaseUrl: "/api/",
+                user: null
             };
 
             Promise.delay(2000)

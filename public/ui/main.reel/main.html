@@ -20,7 +20,7 @@
                     "element": {"#": "appSubstitution"}
                 },
                 "bindings": {
-                    "switchValue": {"<-": "@owner.application.config.isSignedIn ? 'app' : 'onboarding'"}
+                    "switchValue": {"<-": "@owner.application.config.user.defined() ? 'app' : 'onboarding'"}
                 }
             },
 
