@@ -30,11 +30,16 @@ describe('User', () => {
                 return user.save()
             })
             .then(user => {
-                return _db.query('SELECT * from zotplan_user WHERE id = $1::VARCHAR(50)',
+                return _db.query('SELECT name from zotplan_user WHERE id = $1::VARCHAR(50)',
                         ['id2'])
             })
             .then(results => {
                 expect(results[0].name).to.equal('A whole new name')
+                return _db.query('SELECT name from zotplan_user WHERE id = $1::VARCHAR(50)',
+                        ['id1'])
+            })
+            .then(results => {
+                expect(results[0].name).to.equal('First User')
                 done()
             })
             .catch(done)

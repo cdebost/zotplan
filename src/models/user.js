@@ -4,8 +4,9 @@ export default class User extends Model {
 
     save() {
         return Model.db.query('UPDATE zotplan_user SET ' +
-                'name = $1::VARCHAR(80), email = $2::VARCHAR(150)',
-                [this.name, this.email])
+                'name = $1::VARCHAR(80), email = $2::VARCHAR(150)' +
+                'WHERE id = $3::VARCHAR(50)',
+                [this.name, this.email, this.id])
             .then(() => this)
     }
 
