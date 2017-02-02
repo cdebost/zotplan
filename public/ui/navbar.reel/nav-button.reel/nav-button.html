@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="nav-button.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "icon": {
+            "prototype": "ui/base/image.reel",
+            "properties": {
+                "element": {"#": "icon"}
+            },
+            "bindings": {
+                "src": {"<-": "@owner.iconSrc"}
+            }
+        },
+
+        "label": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "label"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.label"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="NavButton">
+        <img data-montage-id="icon" />
+        <div data-montage-id="label" class="NavButton-label"></div>
+    </div>
+</body>
+</html>

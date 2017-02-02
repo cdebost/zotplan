@@ -9,9 +9,4 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Toolbar = Component.specialize(/** @lends Toolbar# */ {
 
-    handleHamburgerButtonAction: {
-        value: function () {
-            this.dispatchEventNamed("hamburgerPressed", false, true);
-        }
-    }
 });

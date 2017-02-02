@@ -7,8 +7,7 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"},
-                "menu": {"@": "menu"}
+                "element": {"#": "owner"}
             },
             "listeners": [
                 {
@@ -31,13 +30,6 @@
             ]
         },
 
-        "menu": {
-            "prototype": "ui/menu.reel",
-            "properties": {
-                "element": {"#": "menu"}
-            }
-        },
-
         "succession": {
             "prototype": "montage/ui/succession.reel",
             "properties": {
@@ -50,6 +42,13 @@
             "properties": {
                 "element": {"#": "home"}
             }
+        },
+
+        "navbar": {
+            "prototype": "ui/navbar.reel",
+            "properties": {
+                "element": {"#": "navbar"}
+            }
         }
     }
     </script>
@@ -57,10 +56,10 @@
 <body>
     <div data-montage-id="owner" class="AppContainer">
         <header data-montage-id="toolbar"></header>
-        <div data-montage-id="menu"></div>
         <div data-montage-id="succession">
             <div data-montage-id="home" data-arg="content"></div>
         </div>
+        <div data-montage-id="navbar">
     </div>
 </body>
 </html>

@@ -1,0 +1,18 @@
+.Navbar {
+    position: absolute;
+    bottom: 0;
+    height: 56px;
+    left: 0;
+    right: 0;
+    background-color: var(--uci-yellow);
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
+.Navbar-buttons {
+    width: 100%;
+    display: flex;
+}
+
+.Navbar-button {
+    flex: 1;
+}

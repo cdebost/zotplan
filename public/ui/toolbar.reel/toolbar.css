@@ -10,12 +10,6 @@
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
-.Toolbar-hamburger {
-    cursor: pointer;
-    width: 48px;
-    height: 48px;
-}
-
 .Toolbar-title {
     padding-left: 16px;
     font-size: 2em;
