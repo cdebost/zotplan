@@ -1,7 +1,6 @@
 .Navbar {
     position: absolute;
     bottom: 0;
-    height: 56px;
     left: 0;
     right: 0;
     background-color: var(--uci-yellow);
