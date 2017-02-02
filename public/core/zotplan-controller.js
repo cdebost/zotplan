@@ -2,6 +2,7 @@
  * @module core/zotplan-controller
  */
 var Target = require("montage/core/target").Target,
+    UserService = require("core/service/user-service").UserService,
     ZotplanAuthService = require("core/service/zotplan-auth-service").ZotplanAuthService;
 
 /**
@@ -14,12 +15,10 @@ exports.ZotplanController = Target.specialize({
         value: false
     },
 
-    _zotplanAuthService: {
-        get: function () {
-            if (!this.__zotplanAuthService) {
-                this.__zotplanAuthService = new ZotplanAuthService();
-            }
-            return this.__zotplanAuthService;
+    constructor: {
+        value: function ZotplanController() {
+            this._zotplanAuthService = new ZotplanAuthService();
+            this._userService = new UserService();
         }
     },
 
@@ -42,25 +41,38 @@ exports.ZotplanController = Target.specialize({
                 })
         }
     },
+
+    fetchOwnUser: {
+        value: function () {
+            var self = this;
+            return this._userService.getOwnUser()
+                .then(function (user) {
+                    self.application.config.user = user;
+                }, function (err) {
+                    self.application.config.user = null;
+                })
+        }
+    },
     
     willFinishLoading: {
         value: function (app) {
-            var self = this;
+            var self = this,
+                loadingPromises;
 
             this.application = app;
-            app.config = {
+            this.application.config = {
                 appName: "Zotplan",
                 isSignedIn: false,
                 apiBaseUrl: "/api/",
                 user: null
             };
 
-            Promise.delay(2000)
-                .then(this._loadGoogleAPI.bind(this))
-                .timeout(10000)
-                .catch(function () {
-                    throw new Error("Unable to load Google APIs");
-                })
+            loadingPromises = [
+                Promise.delay(2000), // Loader shows for a minimum of 2s
+                this._loadGoogleAPI(),
+                this.fetchOwnUser()
+            ];
+            Promise.all(loadingPromises)
                 .then(function () {
                     self.isAppReady = true;
                 });
@@ -74,7 +86,9 @@ exports.ZotplanController = Target.specialize({
                 script.src = "https://apis.google.com/js/platform.js"
                 script.onload = resolve();
                 document.head.appendChild(script);
-            });
+            }).timeout(10000).catch(function () {
+                throw new Error("Unable to load Google APIs");
+            })
         }
     }
 });
