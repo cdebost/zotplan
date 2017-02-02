@@ -2,6 +2,17 @@ import { describeApiTest } from './utils'
 import { expect } from 'chai'
 
 describeApiTest('user route', request => {
+    it('responds to /api/user with the user\'s own user information', done => {
+        request()
+            .get('/api/user')
+            .expect(200)
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.body.id).to.equal('id1')
+                done()
+            })
+    })
+
     it('responds to /api/user/:id where id is the user\'s own id', done => {
         request()
             .get('/api/user/id1')
