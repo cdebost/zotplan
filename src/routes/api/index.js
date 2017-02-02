@@ -3,6 +3,7 @@
 import express from 'express'
 
 import courses from './courses'
+import user from './user'
 
 export default ({config}) => {
     const router = express.Router()
@@ -12,6 +13,7 @@ export default ({config}) => {
     })
 
     router.use('/courses', courses())
+    router.use('/user', user())
 
     return router
 }
