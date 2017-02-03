@@ -23,7 +23,7 @@
                 "element": {"#": "title"}
             },
             "bindings": {
-                "value": {"<-": "@owner.application.config.appName"}
+                "value": {"<-": "@owner.application.config.page == 'Home' ? @owner.application.config.appName : @owner.application.config.page"}
             }
         }
     }
