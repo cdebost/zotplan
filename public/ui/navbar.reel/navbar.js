@@ -22,5 +22,22 @@ exports.Navbar = Component.specialize(/** @lends Navbar# */ {
                 iconSrc: "/assets/icons/magnify.svg"
             }
         ]
+    },
+
+    templateDidLoad: {
+        value: function () {
+            // Need this hack before avoidsEmptySelection isn't working
+            this.buttonsController.select(this.buttonsController.content[0]);
+
+            this.buttonsController.addRangeAtPathChangeListener("selection", this, "handleButtonSelectionChange");
+        }
+    },
+
+    handleButtonSelectionChange: {
+        value: function (plus, minus) {
+            if (plus.length) {
+                this.application.config.page = plus[0].label;
+            }
+        }
     }
 });

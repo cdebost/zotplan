@@ -21,19 +21,16 @@
             "prototype": "ui/toolbar.reel",
             "properties": {
                 "element": {"#": "toolbar"}
-            },
-            "listeners": [
-                {
-                    "type": "hamburgerPressed",
-                    "listener": {"@": "owner"}
-                }
-            ]
+            }
         },
 
-        "succession": {
-            "prototype": "montage/ui/succession.reel",
+        "pageSubstitution": {
+            "prototype": "montage/ui/substitution.reel",
             "properties": {
-                "element": {"#": "succession"}
+                "element": {"#": "pageSubstitution"}
+            },
+            "bindings": {
+                "switchValue": {"<-": "@owner.application.config.page"}
             }
         },
 
@@ -41,6 +38,13 @@
             "prototype": "ui/home.reel",
             "properties": {
                 "element": {"#": "home"}
+            }
+        },
+
+        "myPlans": {
+            "prototype": "ui/my-plans.reel",
+            "properties": {
+                "element": {"#": "myPlans"}
             }
         },
 
@@ -56,8 +60,9 @@
 <body>
     <div data-montage-id="owner" class="AppContainer">
         <header data-montage-id="toolbar"></header>
-        <div data-montage-id="succession">
-            <div data-montage-id="home" data-arg="content"></div>
+        <div data-montage-id="pageSubstitution" class="AppContainer-content">
+            <div data-montage-id="home" data-arg="Home"></div>
+            <div data-montage-id="myPlans" data-arg="My Plans"></div>
         </div>
         <div data-montage-id="navbar">
     </div>
