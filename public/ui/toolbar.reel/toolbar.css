@@ -5,6 +5,7 @@
     top: 0;
     height: 56px;
     display: flex;
+    align-items: center;
     background-color: var(--uci-yellow);
     padding: 0 15px 0 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
@@ -12,5 +13,6 @@
 
 .Toolbar-title {
     padding-left: 16px;
-    font-size: 2em;
+    font-size: 20px;
+    font-weight: 500;
 }
