@@ -8,6 +8,18 @@ CREATE TABLE zotplan_user (
     last_signin TIMESTAMP
 );
 
+CREATE TABLE plan (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    start_year INTEGER NOT NULL
+);
+
+CREATE TABLE user_has_plan (
+    user_id VARCHAR(50) REFERENCES zotplan_user(id) NOT NULL,
+    plan_id INTEGER REFERENCES plan(id) NOT NULL,
+    PRIMARY KEY (user_id, plan_id)
+);
+
 CREATE TABLE course (
     id VARCHAR(15) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -33,25 +45,12 @@ CREATE TABLE course_concurrent (
     PRIMARY KEY (course1_id, course2_id)
 );
 
-CREATE TABLE generaleducation (
-    id VARCHAR(5) PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    number_of_courses INTEGER NOT NULL
-);
-
-INSERT INTO generaleducation VALUES
-    ('I', 'Writing', 3),
-    ('II', 'Science and Technology', 3),
-    ('III', 'Social and Behavioral Sciences', 3),
-    ('IV', 'Arts and Humanities', 3),
-    ('V', 'Quantitative, Symbolic, and Computational Reasoning', 3),
-    ('VI', 'Language Other Than English', 1),
-    ('VII', 'Multicultural Studies', 1),
-    ('VIII', 'International/Global Issues', 1);
-
-CREATE TABLE course_fulfills_generaleducation (
+CREATE TABLE plan_has_course (
+    plan_id INTEGER REFERENCES plan(id) NOT NULL,
     course_id VARCHAR(15) REFERENCES course(id) NOT NULL,
-    ge_id VARCHAR(5) REFERENCES GeneralEducation(id) NOT NULL
+    year INTEGER NOT NULL,
+    quarter INTEGER NOT NULL,
+    PRIMARY KEY (plan_id, course_id, year, quarter)
 );
 
 CREATE TABLE department (

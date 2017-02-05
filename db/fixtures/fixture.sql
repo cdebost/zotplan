@@ -48,3 +48,14 @@ INSERT INTO course_overlaps VALUES
 INSERT INTO course_concurrent VALUES
     ('SOFTENG 1', 'BIM 1');
 
+INSERT INTO plan VALUES
+    (0, 'Main Plan', 2014);
+
+INSERT INTO user_has_plan VALUES
+    ('id1', 0);
+
+INSERT INTO plan_has_course VALUES
+    (0, 'STATS 1', 0, 0),
+    (0, 'CS 1', 0, 0),
+    (0, 'CS 2', 0, 1);
+

@@ -3,6 +3,7 @@
 import express from 'express'
 
 import courses from './courses'
+import plan from './plan'
 import user from './user'
 
 export default ({config}) => {
@@ -13,6 +14,7 @@ export default ({config}) => {
     })
 
     router.use('/courses', courses())
+    router.use('/plan', plan())
     router.use('/user', user())
 
     return router
