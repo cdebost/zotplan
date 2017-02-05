@@ -11,9 +11,15 @@ export default () => {
         Course.all()
             .then(result => {
                 res.send(result)
+            })
+    })
+
+    router.get('/:id', (req, res) => {
+        Course.findById(req.params.id)
+            .then(result => {
+                res.send(result)
             }, err => {
-                console.error(err)
-                res.status(500)
+                res.sendStatus(404)
             })
     })
 
