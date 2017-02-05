@@ -8,19 +8,14 @@ describe('User', () => {
             .then(user => {
                 expect(user.id).to.equal('id2')
                 done()
-            }, err => {
-                console.error(err)
-                done(err)
-            })
+            }, done)
     })
 
     it('throws a RangeError when a find fails', done => {
         User.find('id4')
             .then(user => {
                 done('Should throw a RangeError')
-            }, err => {
-                done()
-            })
+            }, err => done())
     })
 
     it('can be saved', done => {
@@ -40,6 +35,18 @@ describe('User', () => {
             })
             .then(results => {
                 expect(results[0].name).to.equal('First User')
+                done()
+            })
+            .catch(done)
+    })
+
+    it('can fetch the user\'s own plans', done => {
+        User.find('id1')
+            .then(user => {
+                return user.getPlans()
+            })
+            .then(plans => {
+                expect(plans.length).to.equal(1)
                 done()
             })
             .catch(done)

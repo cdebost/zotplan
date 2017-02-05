@@ -1,4 +1,5 @@
 import Model from './model'
+import Plan from './plan'
 
 export default class User extends Model {
 
@@ -16,6 +17,17 @@ export default class User extends Model {
                 'WHERE id = $3::VARCHAR(50)',
                 [this.name, this.email, this.id])
             .then(() => this)
+    }
+
+    getPlans() {
+        return Model.db.query('SELECT * FROM user_has_plan, plan ' +
+                'WHERE user_id = $1::VARCHAR(50) AND plan_id = id',
+                [this.id])
+            .then(results => {
+                return results.map(result => {
+                    return new Plan(result)
+                })
+            })
     }
 
     static find(id) {

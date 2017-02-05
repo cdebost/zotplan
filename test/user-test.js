@@ -34,4 +34,15 @@ describeApiTest('user route', request => {
 			.get('/api/user/id2')
 			.expect(401, done)
 	})
+
+	it('responds to /api/user/:id/plans with the user\'s plans', done => {
+	    request()
+	        .get('/api/user/id1/plans')
+	        .expect(200)
+	        .end((err, res) => {
+	            if (err) return done(err)
+	            expect(res.body.length).to.equal(1)
+	            done()
+	        })
+	})
 })

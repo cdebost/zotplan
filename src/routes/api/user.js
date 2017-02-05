@@ -25,5 +25,19 @@ export default () => {
         }
     })
 
+    router.get('/:userId/plans', (req, res) => {
+        if (req.session.userId !== req.params.userId) {
+            res.sendStatus(401)
+        } else {
+            User.find(req.params.userId)
+                .then(user => {
+                    return user.getPlans()
+                })
+                .then(plans => {
+                    res.send(plans)
+                })
+        }
+    })
+
     return router
 }
