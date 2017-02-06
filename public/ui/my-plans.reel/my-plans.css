@@ -1,3 +1,27 @@
 .MyPlans {
+    height: 100%;
+}
 
+.MyPlans-substitution {
+    height: 100%;
+}
+
+.MyPlans-plansView {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.MyPlans-plansList {
+    flex: 1;
+    padding: 16px;
+}
+
+.MyPlans-planCard + * {
+    margin-top: 16px;
+}
+
+.MyPlans-addPlanButton {
+    width: 100%;
+    margin-top: 16px;
 }

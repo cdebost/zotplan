@@ -8,9 +8,27 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.MyPlans = Component.specialize(/** @lends MyPlans# */ {
-    constructor: {
-        value: function MyPlans() {
-            this.super();
+
+    enterDocument: {
+        value: function () {
+            this.application.delegate.fetchPlans();
+        }
+    },
+
+    exitDocument: {
+        value: function () {
+            this.contentSubstitution.selection = [];
+        }
+    },
+
+    handleAddPlanButtonAction: {
+        value: function () {
+            this.application.delegate.createPlan()
+                .then(function (plan) {
+                    console.log("created plan", plan)
+                }, function (err) {
+                    console.error(err)
+                });
         }
     }
 });

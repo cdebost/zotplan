@@ -2,6 +2,7 @@
  * @module core/zotplan-controller
  */
 var Target = require("montage/core/target").Target,
+    PlanService = require("core/service/plan-service").PlanService,
     UserService = require("core/service/user-service").UserService,
     ZotplanAuthService = require("core/service/zotplan-auth-service").ZotplanAuthService;
 
@@ -18,6 +19,7 @@ exports.ZotplanController = Target.specialize({
     constructor: {
         value: function ZotplanController() {
             this._zotplanAuthService = new ZotplanAuthService();
+            this._planService = new PlanService();
             this._userService = new UserService();
         }
     },
@@ -53,7 +55,26 @@ exports.ZotplanController = Target.specialize({
                 })
         }
     },
-    
+
+    fetchPlans: {
+        value: function () {
+            var self = this;
+            return this._userService.getPlansForUser(this.application.config.user)
+                .then(function (plans) {
+                    self.application.config.plans = plans;
+                });
+        }
+    },
+
+    createPlan: {
+        value: function () {
+            return this._planService.createNew({
+                name: "New Plan",
+                startYear: 2014
+            });
+        }
+    },
+
     willFinishLoading: {
         value: function (app) {
             var self = this,
