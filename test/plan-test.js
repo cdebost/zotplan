@@ -12,4 +12,16 @@ describeApiTest('plan route', request => {
                 done()
             })
     })
+
+    it('can POST to /api/plan to create a new plan', done => {
+        request()
+            .post('/api/plan')
+            .send({ name: "A new plan", startYear: 2010 })
+            .expect(200)
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.body.name).to.equal("A new plan")
+                done()
+            })
+    })
 })

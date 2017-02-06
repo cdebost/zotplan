@@ -27,4 +27,17 @@ describe('Plan', () => {
             })
             .catch(err => done(err))
     })
+
+    it('can be created', done => {
+        Plan.create({
+                name: "My Plan",
+                startYear: 2014
+            })
+            .then(plan => {
+                expect(plan.name).to.equal("My Plan")
+                expect(plan.start_year).to.equal(2014)
+                done()
+            })
+            .catch(done)
+    })
 })
