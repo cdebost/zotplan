@@ -15,7 +15,11 @@ export default () => {
     })
 
     router.post('/', (req, res) => {
-        Plan.create(req.body)
+        Plan.create({
+                name: req.body.name,
+                startYear: req.body.startYear,
+                userId: req.session.userId
+            })
             .then(plan => {
                 res.send(plan)
             }, err => {

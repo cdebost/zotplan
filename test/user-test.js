@@ -41,7 +41,7 @@ describeApiTest('user route', request => {
 	        .expect(200)
 	        .end((err, res) => {
 	            if (err) return done(err)
-	            expect(res.body.length).to.equal(1)
+	            expect(res.body.length).to.be.greaterThan(0)
 	            done()
 	        })
 	})

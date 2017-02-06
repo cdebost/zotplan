@@ -30,13 +30,31 @@ describe('Plan', () => {
 
     it('can be created', done => {
         Plan.create({
-                name: "My Plan",
-                startYear: 2014
+                name: 'My Plan',
+                startYear: 2014,
+                userId: 'id1'
             })
             .then(plan => {
                 expect(plan.name).to.equal("My Plan")
                 expect(plan.start_year).to.equal(2014)
                 done()
+            })
+            .catch(done)
+    })
+
+    it('inserts a record into the user_has_plan table on creation', done => {
+        Plan.create({
+                name: 'My Plan',
+                startYear: 2014,
+                userId: 'id1'
+            })
+            .then(plan => {
+                return _db.query('SELECT plan_id FROM user_has_plan WHERE user_id = $1::VARCHAR(50)',
+                        ['id1'])
+                    .then(result => {
+                        expect(result[result.length-1].plan_id).to.equal(plan.id)
+                        done()
+                    })
             })
             .catch(done)
     })

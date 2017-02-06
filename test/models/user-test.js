@@ -46,7 +46,7 @@ describe('User', () => {
                 return user.getPlans()
             })
             .then(plans => {
-                expect(plans.length).to.equal(1)
+                expect(plans.length).to.be.greaterThan(0)
                 done()
             })
             .catch(done)

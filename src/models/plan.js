@@ -37,13 +37,18 @@ export default class Plan extends Model {
             })
     }
 
-    static create(data) {
+    static create({ name, startYear, userId }) {
         return Model.db.query('INSERT INTO plan (name, start_year) ' +
                 'VALUES ($1::VARCHAR(50), $2::INTEGER) ' +
                 'RETURNING id',
-                [data.name, data.startYear])
+                [name, startYear])
             .then(results => {
                 return Plan.findById(results[0].id)
+            })
+            .then(plan => {
+                return Model.db.query('INSERT INTO user_has_plan VALUES ($1::VARCHAR(50), $2::INTEGER)',
+                        [userId, plan.id])
+                    .then(() => plan)
             })
     }
 
