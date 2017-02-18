@@ -23,9 +23,11 @@ exports.MyPlans = Component.specialize(/** @lends MyPlans# */ {
 
     handleAddPlanButtonAction: {
         value: function () {
-            this.application.delegate.createPlan()
+            var delegate = this.application.delegate;
+            delegate.createPlan()
                 .then(function (plan) {
-                    console.log("created plan", plan)
+                    delegate.fetchPlans();
+                    console.log("created plan", plan);
                 }, function (err) {
                     console.error(err)
                 });
