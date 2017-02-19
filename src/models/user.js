@@ -20,13 +20,13 @@ export default class User extends Model {
     }
 
     getPlans() {
-        return Model.db.query('SELECT * FROM user_has_plan, plan ' +
-                'WHERE user_id = $1::VARCHAR(50) AND plan_id = id',
+        return Model.db.query('SELECT plan_id FROM user_has_plan ' +
+                'WHERE user_id = $1::VARCHAR(50)',
                 [this.id])
             .then(results => {
-                return results.map(result => {
-                    return new Plan(result)
-                })
+                return Promise.all(results.map(result => {
+                    return Plan.findById(result.plan_id)
+                }))
             })
     }
 
