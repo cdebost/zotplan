@@ -39,7 +39,7 @@ function exploreDepartment($, element, name) {
             if (i === 0) {
                 // Course ID, name, units
                 let titleComponents = text.split('.')
-                course.id = titleComponents[0].trim().replace(String.fromCharCode(160), ' ')
+                course.id = titleComponents[0].trim().replace(new RegExp(String.fromCharCode(160), 'g'), ' ')
                 course.name = titleComponents[1].trim()
                 course.units = titleComponents[2].trim().split(' ')[0]
             } else if (i === 2) {
