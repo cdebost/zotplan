@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 const cheerio = require('cheerio')
 const Promise = require('bluebird')
