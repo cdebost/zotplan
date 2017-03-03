@@ -8,25 +8,24 @@ import User from '../models/user.js';
 export default () => {
     const router = express.Router();
 
-    router.get('/:id', (req, res) => {
-        Plan.findById(req.params.id)
-            .then(plan => {
-                res.send(plan);
-            });
+    router.get('/:id', async function (req, res) {
+        try {
+            res.send(await Plan.findById(req.params.id))
+        } catch (err) {
+            res.sendStatus(404);
+        }
     });
 
-    router.post('/', (req, res) => {
-        Plan.create({
-                name: req.body.name,
-                startYear: req.body.startYear
-            })
-            .then(plan => {
-                return User.update({ _id: req.session.userId }, { $push: { plans: plan._id } })
-                    .then(() => res.send(plan));
-            })
-            .catch(err => {
-                res.sendStatus(400);
-            })
+    router.post('/', async function (req, res)  {
+        try {
+            const plan = await Plan.create({
+                name: req.body.name, startYear: req.body.startYear
+            });
+            await User.update({ _id: req.session.userId }, { $push: { plans: plan._id } });
+            res.send(plan);
+        } catch (err) {
+            res.sendStatus(400);
+        }
     });
 
     return router;

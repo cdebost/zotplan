@@ -3,6 +3,7 @@
 import express from 'express'
 import http from 'http'
 import Mongoose from 'mongoose'
+import 'babel-polyfill';
 
 import routes from './routes'
 

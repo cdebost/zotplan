@@ -7,33 +7,31 @@ import User from '../models/user.js';
 export default () => {
     const router = express.Router();
 
-    router.get('/', (req, res) => {
-        User.findById(req.session.userId)
-            .then(user => {
-                res.send(user.safeProps);
-            });
+    router.get('/', async function (req, res) {
+        res.send((await User.findById(req.session.userId)).safeProps);
     });
 
-    router.get('/:userId', (req, res) => {
+    router.get('/:userId', async function (req, res) {
         if (req.session.userId !== req.params.userId) {
             res.sendStatus(401);
         } else {
-            User.findById(req.params.userId)
-                .then(user => {
-                    res.send(user.safeProps);
-                });
+            try {
+                res.send((await User.findById(req.params.userId)).safeProps);
+            } catch (err) {
+                res.sendStatus(404);
+            }
         }
     });
 
-    router.get('/:userId/plans', (req, res) => {
+    router.get('/:userId/plans', async function (req, res) {
         if (req.session.userId !== req.params.userId) {
             res.sendStatus(401);
         } else {
-            User.findById(req.params.userId)
-                .populate('plans')
-                .then(user => {
-                    res.send(user.plans);
-                });
+            try {
+                res.send((await User.findById(req.params.userId).populate('plans')).plans);
+            } catch (err) {
+                res.sendStatus(404);
+            }
         }
     });
 
