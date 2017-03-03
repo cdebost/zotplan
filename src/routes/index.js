@@ -1,11 +1,14 @@
 'use strict'
 
-import api from './api'
-import auth from './auth'
 import express from 'express'
 import path from 'path'
 import bodyParser from 'body-parser'
 import session from 'express-session'
+
+import auth from './auth.js'
+import courses from './courses'
+import plan from './plan'
+import user from './user'
 
 export default ({app, config}) => {
     app.use(bodyParser.json())
@@ -25,6 +28,10 @@ export default ({app, config}) => {
         } else {
             return res.sendStatus(401)
         }
-    }, api({config}))
+    });
+
+    app.use('/api/courses', courses());
+    app.use('/api/plan', plan());
+    app.use('/api/user', user());
 }
 

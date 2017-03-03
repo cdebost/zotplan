@@ -2,7 +2,7 @@
 
 import express from 'express';
 
-import User from '../../models/user.js';
+import User from '../models/user.js';
 
 export default () => {
     const router = express.Router();

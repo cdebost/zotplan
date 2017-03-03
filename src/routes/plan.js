@@ -2,8 +2,8 @@
 
 import express from 'express';
 
-import Plan from '../../models/plan.js';
-import User from '../../models/user.js';
+import Plan from '../models/plan.js';
+import User from '../models/user.js';
 
 export default () => {
     const router = express.Router();

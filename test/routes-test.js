@@ -22,12 +22,6 @@ describeApiTest('routing', request => {
             .expect(200, done)
     })
 
-    it('responds to /api', done => {
-        request()
-            .get('/api')
-            .expect(200, done)
-    })
-
     it('404s any invalid routes', done => {
         request()
             .get('/courses')

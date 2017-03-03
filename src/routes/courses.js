@@ -2,7 +2,7 @@
 
 import express from 'express';
 
-import Course from '../../models/course.js';
+import Course from '../models/course.js';
 
 export default () => {
     const router = express.Router();

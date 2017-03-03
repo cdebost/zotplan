@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import express from 'express';
 import session from 'express-session';
 
-import User from '../../models/user';
+import User from '../models/user';
 
 export default ({config}) => {
     const router = express.Router();
