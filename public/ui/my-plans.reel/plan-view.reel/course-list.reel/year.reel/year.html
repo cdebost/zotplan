@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="year.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            },
+            "bindings": {
+                "classList.has('isExpanded')": {"<-": "@owner.isExpanded"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+
+        "expandButton": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "expandButton"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.isExpanded ? '-' : '+'"}
+            }
+        },
+
+        "label": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "label"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.year"}
+            }
+        },
+
+        "units": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "units"}
+            },
+            "bindings": {
+                "value": {"<-": "@quarters.childComponents.map{units}.sum() + ' units'"}
+            }
+        },
+
+        "quarters": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "quarters"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.quarters"}
+            }
+        },
+
+        "quarter": {
+            "prototype": "../quarter.reel",
+            "properties": {
+                "element": {"#": "quarter"}
+            },
+            "bindings": {
+                "iteration": {"<-": "@quarters:iteration"},
+                "courses": {"<-": "iteration.object"},
+                "quarter": {"<-": "iteration.index"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Year">
+        <div class="Year-header">
+            <div data-montage-id="expandButton" class="Year-expandButton"></div>
+            <div data-montage-id="label" class="Year-label"></div>
+            <div data-montage-id="units"></div>
+        </div>
+        <div data-montage-id="quarters" class="Year-quarters">
+            <div data-montage-id="quarter"></div>
+        </div>
+    </div>
+</body>
+</html>

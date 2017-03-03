@@ -1,0 +1,11 @@
+.Cell {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    margin: 4px;
+}
+
+.Cell-substitution {
+    overflow: hidden;
+    width: 100%;
+}

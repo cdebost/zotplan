@@ -11,4 +11,5 @@
 .AppContainer-content {
     flex: 1;
     background-color: #E8E8E8;
+    overflow: auto;
 }

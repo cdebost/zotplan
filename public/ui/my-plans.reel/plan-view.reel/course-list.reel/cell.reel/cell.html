@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="cell.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "substitution": {
+            "prototype": "montage/ui/substitution.reel",
+            "properties": {
+                "element": {"#": "substitution"}
+            },
+            "bindings": {
+                "switchValue": {"<-": "@owner.info.data.children.defined() ? 'section' : 'course'"}
+            }
+        },
+
+        "sectionCell": {
+            "prototype": "./section-cell.reel",
+            "properties": {
+                "element": {"#": "sectionCell"}
+            },
+            "bindings": {
+                "info": {"<-": "@owner.info"},
+                "data": {"<-": "info.data"}
+            }
+        },
+
+        "courseCell": {
+            "prototype": "./course-cell.reel",
+            "properties": {
+                "element": {"#": "courseCell"}
+            },
+            "bindings": {
+                "data": {"<-": "@owner.info.data"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Cell">
+        <div data-montage-id="substitution" class="Cell-substitution">
+            <div data-montage-id="sectionCell" data-arg="section"></div>
+            <div data-montage-id="courseCell" data-arg="course"></div>
+        </div>
+    </div>
+</body>
+</html>

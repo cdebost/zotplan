@@ -1,0 +1,14 @@
+.CourseCell {
+    display: flex;
+    white-space: nowrap;
+}
+
+.CourseCell > * + * {
+    margin-left: 10px;
+}
+
+.CourseCell-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 1;
+}

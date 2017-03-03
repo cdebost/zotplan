@@ -1,0 +1,33 @@
+.Year {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.Year-header {
+    display: flex;
+    padding: 12px;
+}
+
+.Year-expandButton {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Year-expandButton:focus {
+    outline: none;
+}
+
+.Year-label {
+    flex: 1;
+}
+
+.Year-quarters {
+    display: none;
+    margin-left: 20px;
+}
+
+.Year.isExpanded .Year-quarters {
+    display: block;
+}

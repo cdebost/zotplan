@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="course.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "id": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "id"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.course.id"}
+            }
+        },
+
+        "name": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "name"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.course.name"}
+            }
+        },
+
+        "units": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "units"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.course.units + ' units'"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Course">
+        <div data-montage-id="id"></div>
+        <div data-montage-id="name" class="Course-name"></div>
+        <div data-montage-id="units"></div>
+    </div>
+</body>
+</html>

@@ -9,12 +9,23 @@
             "properties": {
                 "element": {"#": "owner"}
             }
+        },
+
+        "courseList": {
+            "prototype": "./course-list.reel",
+            "properties": {
+                "element": {"#": "courseList"}
+            },
+            "bindings": {
+                "plan": {"<-": "@owner.plan"}
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="PlanView">
+        <div data-montage-id="courseList"></div>
     </div>
 </body>
 </html>

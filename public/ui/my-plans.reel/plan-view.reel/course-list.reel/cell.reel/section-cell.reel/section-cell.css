@@ -1,0 +1,18 @@
+.SectionCell {
+    display: flex;
+}
+
+.SectionCell-expandButton {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.SectionCell-expandButton:focus {
+    outline: none;
+}
+
+.SectionCell-label {
+    flex: 1;
+}
