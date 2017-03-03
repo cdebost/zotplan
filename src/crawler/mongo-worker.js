@@ -1,10 +1,9 @@
 'use strict';
 
 const Mongoose = require('mongoose');
-const Bluebird = require('bluebird');
 
-const Department = require('../../../src/models/department.js');
-const Course = require('../../../src/models/course.js');
+const Department = require('../models/department.js');
+const Course = require('../models/course.js');
 
 const pendingSavePromises = [];
 
@@ -12,7 +11,6 @@ function connect() {
     return new Promise((resolve, reject) => {
         console.log("Connecting to MongoDB");
         Mongoose.connect('mongodb://localhost/development');
-        Mongoose.Promise = Bluebird;
         const db = Mongoose.connection;
         db.on('error', error => {
             console.error('Error connecting:', error);

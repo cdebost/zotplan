@@ -5,8 +5,10 @@
   "main": "dist",
   "scripts": {
     "build": "babel src -s -D -d dist",
+    "clean": "rm -rf dist",
     "start": "node dist",
-    "test": "scripts/test.sh"
+    "test": "scripts/test.sh",
+    "crawler": "node dist/crawler"
   },
   "repository": {
     "type": "git",
@@ -33,8 +35,11 @@
     "babel-preset-latest": "^6.22.0",
     "babel-register": "^6.22.0",
     "chai": "^3.5.0",
+    "cheerio": "^0.22.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "supertest": "^2.0.1"
+    "request": "^2.79.0",
+    "supertest": "^2.0.1",
+    "url-parse": "^1.1.8"
   }
 }
