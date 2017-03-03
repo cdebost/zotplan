@@ -11,7 +11,8 @@ export function describeApiTest(name, tests, shouldSignIn = true) {
         beforeEach(done => {
             app = new App({
                 environment: 'test',
-                googleClient: new GoogleClientMock()
+                googleClient: new GoogleClientMock(),
+                port: 8001
             });
             if (!shouldSignIn) {
                 done();
