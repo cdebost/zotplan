@@ -5,6 +5,7 @@
   "main": "dist",
   "scripts": {
     "start": "babel-watch src",
+    "build": "babel src -s -D -d dist",
     "clean": "rm -rf dist",
     "test": "nodemon src --exec scripts/test.sh",
     "crawler": "node dist/crawler"

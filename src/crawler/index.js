@@ -1,36 +1,31 @@
-"use strict"
+'use strict';
 
-const catalogueScraper = require('./catalogue-scraper.js')
-const courseInterpreter = require('./course-interpreter.js')
-const mongoWorker = require('./mongo-worker.js')
+import 'babel-polyfill';
+import { scrape } from './catalogue-scraper.js';
+import { interpret } from './course-interpreter.js';
+import { work } from './mongo-worker.js';
 
 const SCHOOLS = require('./schools.json')
 
-let data = {}
-let scrapePromises = []
-
-for (const s in SCHOOLS) {
-    const school = SCHOOLS[s]
-    scrapePromises.push(
-        catalogueScraper.parse(school.courseInventoryUrl, school.name).then(function (departments) {
+const main = async function () {
+    try {
+        let data = {};
+        for (const s in SCHOOLS) {
+            const school = SCHOOLS[s];
+            const departments = await scrape(school.courseInventoryUrl, school.name);
             for (const d in departments) {
-                const department = departments[d]
-                courseInterpreter.interpret(department, d)
+                const department = departments[d];
+                interpret(department, d);
             }
-            data[school.name] = departments
-        })
-    );
+            data[school.name] = departments;
+        }
+        await work(data);
+        console.log('Completed successfully');
+        process.exit();
+    } catch (err) {
+        console.error(err, err.stack)
+        console.error('Completed with errors');
+        process.exit(1);
+    }
 }
-
-Promise.all(scrapePromises).then(function () {
-    return mongoWorker.work(data)
-        .then(function () {
-            console.log('Completed successfully');
-            process.exit();
-        })
-}).catch(function (err) {
-    console.error(err, err.stack)
-    console.error('Completed with errors');
-    process.exit(1);
-})
-
+main()
