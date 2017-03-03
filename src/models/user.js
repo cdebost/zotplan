@@ -1,55 +1,21 @@
-import Model from './model'
-import Plan from './plan'
+'use strict';
 
-export default class User extends Model {
+const Mongoose = require('mongoose');
 
-    get safeProps() {
-        return {
-            id: this.id,
-            name: this.name,
-            email: this.email
-        }
-    }
+const userSchema = new Mongoose.Schema({
+    _id: String,
+    accountType: String,
+    name: String,
+    email: String,
+    passwordHash: String,
+    created: { type: Date, default: Date.now },
+    lastSignin: Date,
+    plans: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'Plan' }]
+});
 
-    save() {
-        return Model.db.query('UPDATE zotplan_user SET ' +
-                'name = $1::VARCHAR(80), email = $2::VARCHAR(150)' +
-                'WHERE id = $3::VARCHAR(50)',
-                [this.name, this.email, this.id])
-            .then(() => this)
-    }
+userSchema.virtual('safeProps')
+    .get(function () {
+        return { id: this._id, name: this.name, email: this.email };
+    });
 
-    getPlans() {
-        return Model.db.query('SELECT plan_id FROM user_has_plan ' +
-                'WHERE user_id = $1::VARCHAR(50)',
-                [this.id])
-            .then(results => {
-                return Promise.all(results.map(result => {
-                    return Plan.findById(result.plan_id)
-                }))
-            })
-    }
-
-    static find(id) {
-        const self = this
-        return (id ? Promise.resolve() : Promise.reject(new Error('No ID specified')))
-            .then(() => {
-                return self.db.query('SELECT * FROM zotplan_user WHERE id = $1::VARCHAR(50)', [id])
-            })
-            .then(result => {
-                if (result.length === 0) {
-                    throw new RangeError('No record found')
-                }
-                return new User(result[0])
-            })
-    }
-
-    static searchByEmail(email) {
-        const self = this
-        return this.db.query('SELECT * FROM zotplan_user WHERE email = $1::VARCHAR(150)', [email])
-            .then(results => {
-                return results.map(result => new User(result))
-            })
-    }
-}
-
+export default Mongoose.model('User', userSchema);

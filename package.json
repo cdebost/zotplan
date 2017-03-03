@@ -24,6 +24,7 @@
     "express": "^4.14.0",
     "express-session": "^1.15.0",
     "google-auth-library": "^0.10.0",
+    "mongoose": "^4.8.5",
     "pg": "^6.1.2"
   },
   "devDependencies": {

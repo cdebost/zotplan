@@ -1,43 +1,41 @@
-'use strict'
+'use strict';
 
-import express from 'express'
+import express from 'express';
 
-import User from '../../models/user.js'
+import User from '../../models/user.js';
 
 export default () => {
-    const router = express.Router()
+    const router = express.Router();
 
     router.get('/', (req, res) => {
-        User.find(req.session.userId)
+        User.findById(req.session.userId)
             .then(user => {
-                res.send(user.safeProps)
-            })
-    })
+                res.send(user.safeProps);
+            });
+    });
 
     router.get('/:userId', (req, res) => {
         if (req.session.userId !== req.params.userId) {
-            res.sendStatus(401)
+            res.sendStatus(401);
         } else {
-            User.find(req.params.userId)
+            User.findById(req.params.userId)
                 .then(user => {
-                    res.send(user.safeProps)
-                })
+                    res.send(user.safeProps);
+                });
         }
-    })
+    });
 
     router.get('/:userId/plans', (req, res) => {
         if (req.session.userId !== req.params.userId) {
-            res.sendStatus(401)
+            res.sendStatus(401);
         } else {
-            User.find(req.params.userId)
+            User.findById(req.params.userId)
+                .populate('plans')
                 .then(user => {
-                    return user.getPlans()
-                })
-                .then(plans => {
-                    res.send(plans)
-                })
+                    res.send(user.plans);
+                });
         }
-    })
+    });
 
-    return router
-}
+    return router;
+};

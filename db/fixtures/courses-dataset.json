@@ -1,0 +1,10 @@
+{ "_id": "CS 1", "name": "Intro to Computer Science", "units": 4 }
+{ "_id": "CS 2", "name": "Programming Shuttle Control Systems in Binary", "units": 16, "description": "Time to weed out the weak.", "prerequisite": {"type": "course", "value": "CS 1"}, "recommended": "An IQ over 450", "designUnits": 64, "restriction": "May never be taken again."}
+{ "_id": "CS 3", "name": "Embedded Systems", "units": 4, "prerequisite": {"type": "course", "value": "CS 1"}, "corequisite": {"type": "course", "value": "CS 3L"}}
+{ "_id": "CS 3L", "name": "Embedded Systems Lab", "units": 1, "corequisite": {"type": "course", "value": "CS 3"}, "gradingOption": "P/NP only." }
+{ "_id": "SOFTENG 1", "name": "Software Management", "units": 4, "description": "Learn to manage the software things", "prerequisite": {"type": "and", "children": [{"type": "course", "value": "CS 1"}, {"type": "course", "value": "STATS 1"}]}, "overlaps": ["BIM 1"], "concurrentWith": ["BIM 1"] }
+{ "_id": "BIM 1", "name": "Software Management", "units": 4, "description": "Learn to manage the software things", "prerequisite": {"type": "and", "children": [{"type": "course", "value": "CS 1"}, {"type": "course", "value": "STATS 1"}]}, "overlaps": ["SOFTENG 1"], "concurrentWith": ["SOFTENG 1"] }
+{ "_id": "BIM 2", "name": "Management Capstone", "units": 4, "prerequisite": {"type": "or", "children": [{"type": "course", "value": "BIM 1"}, {"type": "course", "value": "SOFTENG 1"}]}}
+{ "_id": "EECS 1", "name": "Intro to Electrical Engineering", "units": 4}
+{ "_id": "MECHENG 1", "name": "Intro to Mechanical Engineering", "units": 4}
+{ "_id": "STATS 1", "name": "Intro to Statistics", "units": 4}

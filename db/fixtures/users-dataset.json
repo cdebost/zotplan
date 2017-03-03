@@ -1,0 +1,26 @@
+{
+    "_id": "id1",
+    "accountType": "zotplan",
+    "name": "First User",
+    "email": "first@zotplan.com",
+    "passwordHash": "$2a$10$y293.XA18EwDjqZwMZ4Cm.7fhp288pD/PeUwYagrxMngK58Y6l1Vm",
+    "plans": ["56cb91bdc3464f14678934ca"]
+}
+{
+    "_id": "id2",
+    "accountType": "zotplan",
+    "name": "Second User",
+    "email": "second@zotplan.com"
+}
+{
+    "_id": "id3",
+    "accountType": "zotplan",
+    "name": "Third User",
+    "email": "third@zotplan.com"
+}
+{
+    "_id": "go_id1",
+    "accountType": "google",
+    "name": "Google User",
+    "email": "user@google.com"
+}

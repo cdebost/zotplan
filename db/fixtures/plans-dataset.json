@@ -1,0 +1,1 @@
+{ "_id": ObjectId("56cb91bdc3464f14678934ca"), "name": "Main Plan", "startYear": 2014, "courses": [ [ ["STATS 1", "CS 1", "CS 2"]]] }

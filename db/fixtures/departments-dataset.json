@@ -1,0 +1,6 @@
+{ "_id": "COMPSCI", "courses": [ "CS 1", "CS 2", "CS 3", "CS 3L"]}
+{ "_id": "SOFTENG", "courses": [ "SOFTENG 1"]}
+{ "_id": "BIM", "courses": [ "BIM 1", "BIM 2"]}
+{ "_id": "EECS", "courses": [ "EECS 1"]}
+{ "_id": "MECHENG", "courses": [ "MECHENG 1"]}
+{ "_id": "STATS", "courses": [ "STATS 1"]}

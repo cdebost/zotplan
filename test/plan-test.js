@@ -4,7 +4,7 @@ import { expect } from 'chai'
 describeApiTest('plan route', request => {
     it('responds to /api/plan/:id where the plan id is valid', done => {
         request()
-            .get('/api/plan/0')
+            .get('/api/plan/56cb91bdc3464f14678934ca')
             .expect(200)
             .end((err, res) => {
                 if (err) return done(err)

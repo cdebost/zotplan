@@ -1,10 +1,8 @@
-echo 'Generating test database'
-sudo -u postgres psql -d zotplan_test -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;' > /dev/null 2> /dev/null
-sudo -u postgres psql -d zotplan_test -f 'db/schema/schema.sql' > /dev/null
-
 echo 'Populating test data'
-sudo -u postgres psql -d zotplan_test -f 'db/fixtures/fixture.sql' > /dev/null
+mongoimport --db zotplan_test --collection departments --drop --file db/fixtures/departments-dataset.json
+mongoimport --db zotplan_test --collection courses     --drop --file db/fixtures/courses-dataset.json
+mongoimport --db zotplan_test --collection users       --drop --file db/fixtures/users-dataset.json
+mongoimport --db zotplan_test --collection plans       --drop --file db/fixtures/plans-dataset.json
 
 echo 'Running test'
 ENVIRONMENT=test istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill --recursive ./test
-
