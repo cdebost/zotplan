@@ -1,7 +1,6 @@
 'use strict'
 
 const cheerio = require('cheerio')
-const Promise = require('bluebird')
 const request = require('request')
 const URL = require('url-parse')
 

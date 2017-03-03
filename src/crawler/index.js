@@ -1,8 +1,8 @@
 "use strict"
 
-const catalogueScraper = require('./src/catalogue-scraper.js')
-const courseInterpreter = require('./src/course-interpreter.js')
-const mongoWorker = require('./src/mongo-worker.js')
+const catalogueScraper = require('./catalogue-scraper.js')
+const courseInterpreter = require('./course-interpreter.js')
+const mongoWorker = require('./mongo-worker.js')
 
 const SCHOOLS = require('./schools.json')
 
