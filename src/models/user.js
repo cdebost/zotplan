@@ -10,12 +10,20 @@ const userSchema = new Mongoose.Schema({
     passwordHash: String,
     created: { type: Date, default: Date.now },
     lastSignin: Date,
-    plans: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'Plan' }]
+    plans: [{
+        name: String,
+        startYear: Number,
+        years: [{
+            quarters: [{
+                courses: [{ type: String, ref: 'Course' }]
+            }]
+        }]
+    }]
 });
 
 userSchema.virtual('safeProps')
     .get(function () {
-        return { id: this._id, name: this.name, email: this.email };
+        return { id: this._id, name: this.name, email: this.email, plans: this.plans };
     });
 
 export default Mongoose.model('User', userSchema);

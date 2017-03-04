@@ -17,7 +17,7 @@
                 "element": {"#": "years"}
             },
             "bindings": {
-                "content": {"<-": "@owner.years"}
+                "content": {"<-": "@owner.plan.years"}
             }
         },
 
@@ -28,8 +28,8 @@
             },
             "bindings": {
                 "iteration": {"<-": "@years:iteration"},
-                "quarters": {"<-": "iteration.object"},
-                "year": {"<-": "@owner.plan.start_year + iteration.index"}
+                "quarters": {"<-": "iteration.object.quarters"},
+                "year": {"<-": "@owner.plan.startYear + iteration.index"}
             }
         }
     }

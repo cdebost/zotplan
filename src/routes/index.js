@@ -7,7 +7,6 @@ import session from 'express-session'
 
 import auth from './auth.js'
 import courses from './courses'
-import plan from './plan'
 import user from './user'
 
 export default ({app, config}) => {
@@ -31,7 +30,6 @@ export default ({app, config}) => {
     });
 
     app.use('/api/courses', courses());
-    app.use('/api/plan', plan());
     app.use('/api/user', user());
 }
 

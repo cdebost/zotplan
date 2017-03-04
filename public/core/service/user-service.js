@@ -18,22 +18,5 @@ exports.UserService = Montage.specialize({
                 req.send();
             });
         }
-    },
-
-    getPlansForUser: {
-        value: function (user) {
-            return new Promise(function (resolve, reject) {
-                var req = new XMLHttpRequest();
-                req.open("GET", application.config.apiBaseUrl + "user/" + user.id + "/plans");
-                req.onload = function () {
-                    if (req.status === 200) {
-                        resolve(JSON.parse(req.response));
-                    } else {
-                        reject(req.body);
-                    }
-                }
-                req.send();
-            });
-        }
     }
 });

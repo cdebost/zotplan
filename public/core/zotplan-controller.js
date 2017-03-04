@@ -56,16 +56,6 @@ exports.ZotplanController = Target.specialize({
         }
     },
 
-    fetchPlans: {
-        value: function () {
-            var self = this;
-            return this._userService.getPlansForUser(this.application.config.user)
-                .then(function (plans) {
-                    self.application.config.plans = plans;
-                });
-        }
-    },
-
     createPlan: {
         value: function () {
             return this._planService.createNew({

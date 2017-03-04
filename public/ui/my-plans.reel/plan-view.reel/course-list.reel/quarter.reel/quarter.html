@@ -41,7 +41,7 @@
                 "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "['Fall', 'Winter', 'Spring'][@owner.quarter]"}
+                "value": {"<-": "['Fall', 'Winter', 'Spring', 'Summer'][@owner.quarter]"}
             }
         },
 
@@ -61,7 +61,7 @@
                 "element": {"#": "courses"}
             },
             "bindings": {
-                "content": {"<-": "@owner.courses.filter{defined()}"}
+                "content": {"<-": "@owner.courses"}
             }
         },
 

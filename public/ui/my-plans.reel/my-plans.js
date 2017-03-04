@@ -11,7 +11,7 @@ exports.MyPlans = Component.specialize(/** @lends MyPlans# */ {
 
     enterDocument: {
         value: function () {
-            this.application.delegate.fetchPlans();
+            this.application.delegate.fetchOwnUser();
         }
     },
 
