@@ -8,7 +8,7 @@ exports.PlanService = Montage.specialize({
             return new Promise(function (resolve, reject) {
                 var req = new XMLHttpRequest(),
                     body = { name: data.name, startYear: data.startYear };
-                req.open("POST", application.config.apiBaseUrl + "plan");
+                req.open("POST", application.config.apiBaseUrl + "user/" + application.config.user.id + "/plan");
                 req.setRequestHeader("Content-Type", "application/json");
                 req.onload = function () {
                     if (req.status === 200) {

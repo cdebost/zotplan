@@ -26,7 +26,7 @@ exports.MyPlans = Component.specialize(/** @lends MyPlans# */ {
             var delegate = this.application.delegate;
             delegate.createPlan()
                 .then(function (plan) {
-                    delegate.fetchPlans();
+                    delegate.fetchOwnUser();
                     console.log("created plan", plan);
                 }, function (err) {
                     console.error(err)
