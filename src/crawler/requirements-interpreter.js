@@ -4,24 +4,24 @@ import assert from 'assert';
 
 const splitTokens = ['(', ')', 'or', 'and'];
 
-export function interpret(data, departmentName) {
-    for (const course of Object.values(data)) {
-        if (course.prerequisite) {
-            course.prerequisite = resolveRequirements(course.prerequisite, departmentName);
-        }
-        if (course.corequisite) {
-            course.corequisite = resolveRequirements(course.corequisite, departmentName);
-        }
+export function interpret(course) {
+    let prereq = course.prerequisite;
+    let coreq = course.corequisite;
+    if (prereq && !(prereq = resolveRequirements(prereq, course))) {
+        throw new Error('Malformed prerequisite in course ' + course);
     }
-    return data;
+    if (coreq && !(coreq = resolveRequirements(coreq, course))) {
+        throw new Error('Malformed corequisite in course ' + course);
+    }
+    return Object.assign({}, course, {prereq, coreq});
 };
 
-function resolveRequirements(string, departmentName) {
+function resolveRequirements(string, course) {
     let tokens = tokenizeRequisiteString(string);
     try {
         validateRequisiteTokens(tokens);
     } catch (e) {
-        throw new Error("Malformed requirement in department " + departmentName + ": " + e.message);
+        return null;
     }
     return buildRequisiteGroupTree(tokens);
 }

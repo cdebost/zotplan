@@ -1,33 +1,11 @@
 'use strict';
 
-import cheerio from 'cheerio';
-import request from 'request';
-import URL from 'url-parse';
+import { openURL, cleanString } from './utils.js';
 
-function openURL(url) {
-    console.log('Visiting page', url);
-    return new Promise((resolve, reject) => {
-        request(url, (error, response, body) => {
-            if (error) return reject(error);
-            if (response.statusCode === 200) {
-                resolve(cheerio.load(body));
-            }
-        });
-    });
-}
-
-function parseBody($) {
-    const data = {};
-    $('body #courseinventorycontainer .courses').each(function (i, element) {
-        let department = $(this).find('.courseblock .courseblocktitle').text().split(String.fromCharCode(160))[0];
-        data[department] = exploreDepartment($, element, department);
-    });
-    return data;
-}
-
-function exploreDepartment($, element, name) {
-    let data = {};
-    $(element).find('.courseblock').each(function (i, element) {
+export async function scrape(url) {
+    const $ = await openURL(url);
+    let data = [];
+    $('body #courseinventorycontainer .courses .courseblock').each(function (i, element) {
         let course = {};
         
         $(this).find('p').each(function (i, element) {
@@ -85,13 +63,8 @@ function exploreDepartment($, element, name) {
             }
         });
 
-        data[course.id] = course;
+        data.push(course);
     });
 
-    return data
-}
-
-export async function scrape(url, schoolName) {
-    const $ = await openURL(url);
-    return parseBody($, schoolName);
+    return data;
 }
