@@ -1,25 +1,48 @@
 'use strict';
 
 import 'babel-polyfill';
-import { scrape } from './catalogue-scraper.js';
-import { interpret } from './course-interpreter.js';
-import { work } from './mongo-worker.js';
 
-const SCHOOLS = require('./schools.json')
+import { scrape as scrapeSchools } from './school-scraper.js';
+import { scrape as scrapeDepartments } from './department-scraper.js';
+import { scrape as scrapeCourses } from './course-scraper.js';
+import { scrape as scrapeWebsites } from './classwebsites-scraper.js';
+import { interpret } from './requirements-interpreter.js';
+import { work } from './mongo-worker.js';
 
 const main = async function () {
     try {
-        let data = {};
-        for (const s in SCHOOLS) {
-            const school = SCHOOLS[s];
-            const departments = await scrape(school.courseInventoryUrl, school.name);
-            for (const d in departments) {
-                const department = departments[d];
-                interpret(department, d);
-            }
-            data[school.name] = departments;
+        let schools = [];
+        let departments = [];
+        let courses = [];
+
+        console.log('Scraping schools...');
+        schools = scrapeSchools();
+        console.log('Found', schools.length, 'schools');
+        
+        console.log("Scraping departments...");
+        for (let school of schools) {
+            departments = departments.concat(await scrapeDepartments(school.courseInventoryUrl));
         }
-        await work(data);
+        console.log("Found", departments.length, "departments");
+
+        console.log("Scraping courses...");
+        for (let school of schools) {
+            courses = courses.concat(await scrapeCourses(school.courseInventoryUrl));
+        }
+        console.log("Found", courses.length, "courses");
+
+        console.log('Interpreting requirements');
+        courses = courses.map(interpret);
+        console.log('Requirement trees built');
+
+        console.log('Scraping class websites for course offerings...');
+        const offerings = await scrapeWebsites(departments);
+        courses.forEach(course => {
+            course.quartersOffered = offerings[course.id];
+        });
+        const numberOfferings = Object.keys(offerings).length;
+        console.log('Found course offering data for', numberOfferings, 'courses.', courses.length - numberOfferings, 'courses unaccounted for.');
+
         console.log('Completed successfully');
         process.exit();
     } catch (err) {
