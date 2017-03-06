@@ -69,7 +69,13 @@
                 "iteration": {"<-": "@quarters:iteration"},
                 "courses": {"<-": "iteration.object.courses"},
                 "quarter": {"<-": "iteration.index"}
-            }
+            },
+            "listeners": [
+                {
+                    "type": "requestAddCourse",
+                    "listener": {"@": "owner"}
+                }
+            ]
         }
     }
     </script>

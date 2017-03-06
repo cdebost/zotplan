@@ -35,11 +35,17 @@
     flex: 1;
 }
 
-.Quarter-courses {
+.Quarter-content {
     display: none;
     margin-left: 20px;
 }
 
-.Quarter.isExpanded .Quarter-courses {
+.Quarter.isExpanded .Quarter-content {
     display: block;
+}
+
+.Button.Quarter-addCourseButton {
+    border: 1px solid black;
+    border-bottom: none;
+    width: 100%;
 }

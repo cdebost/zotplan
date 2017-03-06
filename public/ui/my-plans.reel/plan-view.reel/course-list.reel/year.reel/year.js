@@ -17,5 +17,11 @@ exports.Year = Component.specialize(/** @lends Year# */ {
         value: function () {
             this.isExpanded = !this.isExpanded;
         }
+    },
+
+    handleQuarterRequestAddCourse: {
+        value: function (e) {
+            console.log("Add course on", this.year, e.detail.quarter);
+        }
     }
 });

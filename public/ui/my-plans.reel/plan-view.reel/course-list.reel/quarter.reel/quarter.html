@@ -73,6 +73,15 @@
             "bindings": {
                 "course": {"<-": "@courses:iteration.object"}
             }
+        },
+
+        "addCourseButton": {
+            "prototype": "ui/base/button.reel",
+            "properties": {
+                "element": {"#": "addCourseButton"},
+                "label": "+ Add a Course",
+                "skin": "green"
+            }
         }
     }
     </script>
@@ -84,8 +93,11 @@
             <div data-montage-id="label" class="Quarter-label"></div>
             <div data-montage-id="units"></div>
         </div>
-        <div data-montage-id="courses" class="Quarter-courses">
-            <div data-montage-id="course"></div>
+        <div class="Quarter-content">
+            <div data-montage-id="courses" class="Quarter-courses">
+                <div data-montage-id="course"></div>
+            </div>
+            <div data-montage-id="addCourseButton" class="Quarter-addCourseButton"></div>
         </div>
     </div>
 </body>

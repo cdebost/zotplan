@@ -19,5 +19,11 @@ exports.Quarter = Component.specialize(/** @lends Quarter# */ {
             e.stopPropagation();
             this.isExpanded = !this.isExpanded;
         }
+    },
+
+    handleAddCourseButtonAction: {
+        value: function () {
+            this.dispatchEventNamed('requestAddCourse', true, false, { quarter: this.quarter });
+        }
     }
 });
