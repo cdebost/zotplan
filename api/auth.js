@@ -6,7 +6,7 @@ import session from 'express-session';
 
 import User from '../models/user';
 
-export default ({config}) => {
+export default ({ googleAuthClient }) => {
     const router = express.Router();
 
     router.post('/zotplan', async function (req, res) {
@@ -27,7 +27,7 @@ export default ({config}) => {
 
     async function verifyGoogleIdToken(token) {
         return new Promise((resolve, reject) => {
-            config.googleClient.verifyIdToken(token, config.googleClientId, (err, login) =>
+            googleAuthClient.verifyIdToken(token, googleAuthClient.id, (err, login) =>
                 resolve(err ? null : login)
             );
         });
