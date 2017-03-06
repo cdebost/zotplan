@@ -8,10 +8,10 @@ export function interpret(course) {
     let prereq = course.prerequisite;
     let coreq = course.corequisite;
     if (prereq && !(prereq = resolveRequirements(prereq, course))) {
-        throw new Error('Malformed prerequisite in course ' + course);
+        throw new Error('Malformed prerequisite in course ' + course.prerequisite);
     }
     if (coreq && !(coreq = resolveRequirements(coreq, course))) {
-        throw new Error('Malformed corequisite in course ' + course);
+        throw new Error('Malformed corequisite in course ' + course.corequisite);
     }
     return Object.assign({}, course, {prereq, coreq});
 };

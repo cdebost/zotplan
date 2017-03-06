@@ -1,6 +1,6 @@
 'use strict';
 
-import { openURL, cleanString } from './utils.js';
+import { openURL, cleanString, startJob, addJobProgress } from './utils.js';
 import cheerio from 'cheerio';
 import request from 'request';
 
@@ -76,6 +76,7 @@ const openTermPage = (quarter, deptName) => {
 export async function scrape(departments) {
     const data = {};
 
+    startJob('Scraping class websites', departments.length);
     let latestQuarter = new Quarter('W14');
     try {
         while (true) {
@@ -91,7 +92,6 @@ export async function scrape(departments) {
 
     let quarter = latestQuarter;
     for (let i = 0; i < 4; i++) {
-        console.log('Reading class websites for', quarter.title);
         for (const department of departments) {
             const $ = await openTermPage(quarter, department.name);
             function cb(i, element) {
@@ -103,6 +103,7 @@ export async function scrape(departments) {
             }
             $('table tr.odd').each(cb);
             $('table tr.even').each(cb);
+            addJobProgress('Scraping class websites', 0.25);
         }
         quarter.decrement();
     }
