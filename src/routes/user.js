@@ -24,7 +24,15 @@ export default () => {
 
     router.post('/:userId/plan', async function (req, res)  {
         try {
-            const plan = { name: req.body.name, startYear: req.body.startYear, courses: [] };
+            const years = [];
+            for (let i = 0; i < 4; i++) {
+                const quarters = [];
+                for (let j = 0; j < 3; j++) {
+                    quarters.push({ courses: [] });
+                }
+                years.push({ quarters });
+            }
+            const plan = { name: req.body.name, startYear: req.body.startYear, years };
             await User.update({ _id: req.session.userId }, { $push: { plans: plan } });
             res.send(plan);
         } catch (err) {

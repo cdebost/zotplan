@@ -35,15 +35,31 @@ describeApiTest('user route', request => {
 			.expect(401, done)
 	})
 
-    it('can POST to /api/user/:id/plan to create a new plan', done => {
-        request()
-            .post('/api/user/id1/plan')
-            .send({ name: "A new plan", startYear: 2010 })
-            .expect(200)
-            .end((err, res) => {
-                if (err) return done(err)
-                expect(res.body.name).to.equal("A new plan")
-                done()
-            });
+    describe('creating plans', done => {
+        it('can POST to /api/user/:id/plan to create a new plan', done => {
+            request()
+                .post('/api/user/id1/plan')
+                .send({ name: "A new plan", startYear: 2010 })
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err)
+                    expect(res.body.name).to.equal("A new plan")
+                    done()
+                });
+        });
+
+        it('initializes plans with an empty course collection of four years', done => {
+            request()
+                .post('/api/user/id1/plan')
+                .send({ name: "Initialized Plan", startYear: 2010 })
+                .expect(200)
+                .end((err, res) => {
+                    if (err) return done(err);
+                    expect(res.body.years.length).to.equal(4);
+                    expect(res.body.years[0].quarters.length).to.equal(3);
+                    expect(res.body.years[0].quarters[0].courses.length).to.equal(0);
+                    done();
+                });
+        });
     });
 })
