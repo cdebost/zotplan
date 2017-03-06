@@ -7,6 +7,7 @@ import { scrape as scrapeDepartments } from './department-scraper.js';
 import { scrape as scrapeCourses } from './course-scraper.js';
 import { scrape as scrapeWebsites } from './classwebsites-scraper.js';
 import { interpret } from './requirements-interpreter.js';
+import { exportDataset } from './dataset-generator.js';
 import { work } from './mongo-worker.js';
 
 const main = async function () {
@@ -29,7 +30,19 @@ const main = async function () {
         for (let school of schools) {
             courses = courses.concat(await scrapeCourses(school.courseInventoryUrl));
         }
-        console.log("Found", courses.length, "courses");
+        console.log('Found', courses.length, 'courses');
+
+        console.log('Linking departments to courses...');
+        for (const course of courses) {
+            const deptId = course.id.split(' ').slice(0, -1).join(' ');
+            for (const department of departments) {
+                if (department.id === deptId) {
+                    department.courses = department.courses || [];
+                    department.courses.push(course.id);
+                }
+            }
+        }
+        console.log('Done linking');
 
         console.log('Interpreting requirements');
         courses = courses.map(interpret);
@@ -42,6 +55,9 @@ const main = async function () {
         });
         const numberOfferings = Object.keys(offerings).length;
         console.log('Found course offering data for', numberOfferings, 'courses.', courses.length - numberOfferings, 'courses unaccounted for.');
+
+        console.log('Generating dataset...');
+        exportDataset({schools, departments, courses});
 
         console.log('Completed successfully');
         process.exit();
