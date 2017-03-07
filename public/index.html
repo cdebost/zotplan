@@ -1,54 +1,17 @@
-<!DOCTYPE html>
+<!doctype html public="storage">
 <html>
-<head>
-    <meta charset="utf-8">
-	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="google-signin-client-id" content="11956410191-h0f137migio4rpp2jng7k80i2e3v4h60.apps.googleusercontent.com">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="google-signin-client-id" content="11956410191-h0f137migio4rpp2jng7k80i2e3v4h60.apps.googleusercontent.com">
+        <meta name="theme-color" content="#FED105">
 
-    <meta name="theme-color" content="#FED105">
-
-	<!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/icons/apple-touch-icon-152x152-precomposed.png">
-	<!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/icons/apple-touch-icon-120x120-precomposed.png">
-	<!-- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7: -->
-	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/icons/apple-touch-icon-76x76-precomposed.png">
-	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-	<link rel="apple-touch-icon-precomposed" href="assets/icons/apple-touch-icon-precomposed.png">
-	<!-- For Android 3.x+ devices: -->
-	<link rel="icon" sizes="196x196" href="assets/icons/apple-touch-icon.png">
-
-    <title>ZotPlan</title>
-
-    <link rel="stylesheet" href="assets/style/style.css" />
-    <link rel="stylesheet" href="assets/style/variables.css" />
-
-    <script src="node_modules/montage/montage.js" async></script>
-    <script type="text/montage-serialization">
-    {
-        "owner": {
-            "prototype": "ui/loader.reel",
-            "properties": {
-                "element": {"#": "owner"}
-            }
-        },
-
-        "zotPlanController": {
-            "prototype": "core/zotplan-controller"
-        },
-
-        "application": {
-            "prototype": "montage/core/application",
-            "properties": {
-                "delegate": {"@": "zotPlanController"}
-            }
-        }
-    }
-    </script>
-</head>
-<body>
-    <div data-montage-id="owner"></div>
-</body>
+        <title>ZotPlan</title>
+    </head>
+    <body>
+        <div id="react-entry"></div>
+        <script src="/bundle.js"></script>
+    </body>
 </html>
