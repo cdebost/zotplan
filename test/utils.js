@@ -1,6 +1,6 @@
-import App from '../src/app';
 import Mongoose from 'mongoose';
 import request from 'supertest';
+import App from '../app.js';
 import GoogleClientMock from './mocks/google-client-mock';
 
 export function describeApiTest(name, tests, shouldSignIn = true) {
@@ -9,16 +9,17 @@ export function describeApiTest(name, tests, shouldSignIn = true) {
         let cookies;
 
         beforeEach(done => {
-            app = new App({
-                environment: 'test',
-                googleClient: new GoogleClientMock(),
-                port: 8001
+            process.env.NODE_ENV = 'test';
+            app = App({
+                port: 36456,
+                dbName: 'mongodb://localhost/zotplan_test',
+                googleAuthClient: new GoogleClientMock()
             });
             if (!shouldSignIn) {
                 done();
             } else {
                 request(app)
-                    .post('/auth/zotplan')
+                    .post('/api/auth/zotplan')
                     .send({ email: 'first@zotplan.com', password: 'password' })
                     .expect(200)
                     .end((err, res) => {

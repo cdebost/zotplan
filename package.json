@@ -4,10 +4,14 @@
   "description": "An application for making multi-year plans for UCI programs, with checks for prerequisites, major requirements, course availability, etc.",
   "main": "dist",
   "scripts": {
-    "start": "babel-watch src",
-    "build": "babel src -s -D -d dist",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
+    "start:prod": "npm run build && node server.bundle.js",
+    "build:client": "webpack",
+    "build:server": "webpack --config webpack.server.config.js",
+    "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
-    "test": "nodemon src --exec scripts/test.sh",
+    "test": "NODE_ENV=test scripts/test.sh",
     "crawler": "node dist/crawler"
   },
   "repository": {
@@ -26,7 +30,7 @@
     "express": "^4.14.0",
     "express-session": "^1.15.0",
     "google-auth-library": "^0.10.0",
-    "history": "^4.5.1",
+    "if-env": "^1.0.0",
     "mongoose": "^4.8.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -37,6 +41,7 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
     "babel-polyfill": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.23.0",
@@ -50,6 +55,8 @@
     "nodemon": "^1.11.0",
     "request": "^2.79.0",
     "supertest": "^2.0.1",
-    "url-parse": "^1.1.8"
+    "url-parse": "^1.1.8",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   }
 }

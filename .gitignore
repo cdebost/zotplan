@@ -2,3 +2,5 @@ node_modules
 coverage
 dist
 *.swp
+server.bundle.js
+public/bundle.js

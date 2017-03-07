@@ -11,14 +11,14 @@ describeApiTest('auth', request => {
     describe('zotplan', () => {
         it('accepts valid credentials', done => {
             request()
-                .post('/auth/zotplan')
+                .post('/api/auth/zotplan')
                 .send({ email: 'first@zotplan.com', password: 'password' })
                 .expect(200, done)
         })
 
         it('returns safe user information', done => {
             request()
-                .post('/auth/zotplan')
+                .post('/api/auth/zotplan')
                 .send({ email: 'first@zotplan.com', password: 'password' })
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
@@ -30,7 +30,7 @@ describeApiTest('auth', request => {
 
         it('denies an invalid email', done => {
             request()
-                .post('/auth/zotplan')
+                .post('/api/auth/zotplan')
                 .send({ email: 'nonexistent@zotplan.com', password: 'password' })
                 .expect(400)
                 .end((err, res) => {
@@ -41,7 +41,7 @@ describeApiTest('auth', request => {
 
         it('denies for an email that exists but only in a non-zotplan account', done => {
             request()
-                .post('/auth/zotplan')
+                .post('/api/auth/zotplan')
                 .send({ email: 'first@google.com', password: 'password' })
                 .expect(400)
                 .end((err, res) => {
@@ -52,7 +52,7 @@ describeApiTest('auth', request => {
 
         it('denies an invalid password', done => {
             request()
-                .post('/auth/zotplan')
+                .post('/api/auth/zotplan')
                 .send({ email: 'first@zotplan.com', password: 'wrong_password' })
                 .expect(400)
                 .end((err, res) => {
@@ -65,14 +65,14 @@ describeApiTest('auth', request => {
     describe('google', () => {
         it('accepts valid tokens', done => {
             request()
-                .post('/auth/google')
+                .post('/api/auth/google')
                 .send({ token: 'test token' })
                 .expect(200, done)
         })
 
         it('returns safe user information', done => {
             request()
-                .post('/auth/google')
+                .post('/api/auth/google')
                 .send({ token: 'test token' })
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
@@ -83,7 +83,7 @@ describeApiTest('auth', request => {
 
         it('denies invalid tokens', done => {
             request()
-                .post('/auth/google')
+                .post('/api/auth/google')
                 .send({ token: 'invalid token' })
                 .expect(400, done)
         })
