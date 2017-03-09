@@ -6,7 +6,7 @@ import Menu from '../../components/Menu.jsx';
 import { toggleMenu, closeMenu } from '../../actions/menu-actions.js';
 
 const mapStateToProps = state => ({
-    isVisible: state.menu.isVisible
+    isMenuVisible: state.menu.isVisible
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +27,7 @@ class App extends React.Component {
         return (
             <div id="app-view">
                 <Header onHamburgerClick={this.props.onHamburgerClick} />
-                <Menu isVisible={this.props.isVisible} closeMenu={this.props.closeMenu} />
+                <Menu isVisible={this.props.isMenuVisible} closeMenu={this.props.closeMenu} />
 
                 <div style={{position: 'relative', top: '56px'}}>
                     {this.props.children}
