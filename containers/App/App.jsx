@@ -23,10 +23,6 @@ class App extends React.Component {
         children: React.PropTypes.object.isRequired
     };
 
-    static contextTypes = {
-        store: React.PropTypes.object
-    };
-
     render() {
         return (
             <div id="app-view">

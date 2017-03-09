@@ -9,12 +9,12 @@ const Header = ({ onHamburgerClick }) => {
         backgroundColor: 'var(--uci-yellow)',
         padding: '0 15px 0 15px',
         boxShadow: '0 2px 5px rgba(0,0,0,.26)',
-        display: 'flex'
+        display: 'flex',
     };
     return (
         <div style={outerStyle}>
-            <button onClick={onHamburgerClick}>=</button>
-            <h1>ZotPlan</h1>
+            <i className="material-icons" onClick={onHamburgerClick}>menu</i>
+            <h1 style={{ marginLeft: 40 }}>ZotPlan</h1>
         </div>
     );
 }
