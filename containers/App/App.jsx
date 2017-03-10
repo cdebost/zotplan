@@ -2,19 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header.jsx';
-import Menu from '../../components/Menu.jsx';
+import Menu from '../Menu.jsx';
 import { toggleMenu, closeMenu } from '../../actions/menu-actions.js';
 
 const mapStateToProps = state => ({
-    isMenuVisible: state.menu.isVisible
 });
 
 const mapDispatchToProps = dispatch => ({
     onHamburgerClick: () => {
         dispatch(toggleMenu());
-    },
-    closeMenu: () => {
-        dispatch(closeMenu());
     }
 });
 
@@ -27,8 +23,7 @@ class App extends React.Component {
         return (
             <div id="app-view">
                 <Header onHamburgerClick={this.props.onHamburgerClick} />
-                <Menu isVisible={this.props.isMenuVisible} closeMenu={this.props.closeMenu} />
-
+                <Menu />
                 <div style={{position: 'relative', top: '56px'}}>
                     {this.props.children}
                 </div>

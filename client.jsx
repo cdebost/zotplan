@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 
 import routes from './routes.jsx';
@@ -17,10 +17,11 @@ const reducer = combineReducers({
 });
 
 const sagaMiddleware = createSagaMiddleware();
+const myRouterMiddleware = routerMiddleware(browserHistory);
 
 const store = createStore(
     reducer,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware, myRouterMiddleware)
 );
 
 sagaMiddleware.run(saga);

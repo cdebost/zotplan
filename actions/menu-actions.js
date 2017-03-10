@@ -5,3 +5,7 @@ export const toggleMenu = () => ({
 export const closeMenu = () => ({
     type: 'CLOSE_MENU'
 });
+
+export const togglePlansExpanded = () => ({
+    type: 'TOGGLE_PLANS_EXPANDED'
+});
