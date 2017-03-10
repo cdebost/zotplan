@@ -1,5 +1,6 @@
 function promisifySend(request, body) {
     return new Promise((resolve, reject) => {
+        request.withCredentials = true;
         request.onload = () => {
             const response = JSON.parse(request.response);
             if (request.status !== 200) {

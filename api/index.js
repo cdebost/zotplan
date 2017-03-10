@@ -12,14 +12,25 @@ export default ({ googleAuthClient }) => {
 
     router.use((req, res, next) => {
         // Allow connections from the webpack dev server
-        res.header("Access-Control-Allow-Origin", "http://localhost:8080");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cookie');
+        res.header('Access-Control-Allow-Credentials', 'true');
         next();
+    });
+
+    // Allow all preflighting requests, since cookies aren't sent with OPTIONS
+    // they would fail the auth test and get a 401
+    router.options('*', (req, res) => {
+        res.sendStatus(200);
     });
 
     router.use(bodyParser.json());
     router.use(session({
         secret: 'replace-this-secret-later',
+        cookie: {
+            maxAge: 656000000,
+            sameSite: false
+        },
         resave: true,
         saveUninitialized: true
     }));
