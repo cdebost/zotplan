@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Menu.css';
 import UserMenuHeader from '../components/MenuUserHeader.jsx';
-import { closeMenu, togglePlansExpanded } from '../actions';
+import { closeMenu, togglePlansExpanded, createNewPlan, selectPlan } from '../actions';
 import { push } from 'react-router-redux';
 import MenuListItem from '../components/MenuListItem.jsx';
 
@@ -23,6 +23,14 @@ const mapDispatchToProps = dispatch => ({
     onClickMyPlans: () => {
         dispatch(togglePlansExpanded());
     },
+    onClickPlan: (user, plan) => {
+        dispatch(selectPlan(plan));
+        dispatch(push(`/user/${user._id}/plan/${plan._id}`));
+        dispatch(closeMenu());
+    },
+    onClickCreateNewPlan: (userId, name, startYear) => {
+        dispatch(createNewPlan(userId, name, startYear));
+    },
     onClickSettings: () => {
         dispatch(push('/settings'));
         dispatch(closeMenu());
@@ -38,8 +46,11 @@ class Menu extends React.Component {
     };
 
     render() {
-        const { closeMenu, isVisible, isPlansExpanded, user,
-            onClickHome, onClickMyPlans, onClickSettings } = this.props;
+        const {
+            closeMenu, isVisible, isPlansExpanded, user,
+            onClickHome, onClickMyPlans, onClickPlan, onClickCreateNewPlan,
+            onClickSettings
+        } = this.props;
         return (
             <div>
                 <div onClick={closeMenu} className={styles.background + ' ' + (isVisible ? styles.visibleBackground : '')} />
@@ -54,8 +65,9 @@ class Menu extends React.Component {
                     } onClick={onClickMyPlans} />
                     { isPlansExpanded &&
                         <div>
-                        { user.plans.map(plan => (<MenuListItem key={plan._id} label={plan.name} />)) }
-                        <MenuListItem label="Create a New Plan" iconName="add" />
+                        { user.plans.map(plan => (<MenuListItem key={plan._id} label={plan.name} indents={1} onClick={onClickPlan.bind(null, user, plan)} />)) }
+                        <MenuListItem label="Create a New Plan" iconName="add" indents={1}
+                            onClick={onClickCreateNewPlan.bind(null, user._id, 'New Plan', 2014)} />
                         </div>
                     }
 

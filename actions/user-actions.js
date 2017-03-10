@@ -11,3 +11,15 @@ export const signIn = (email, password, successCb, failureCb) => {
         password
     };
 };
+
+export const createNewPlan = (userId, name, startYear) => ({
+    type: 'CREATE_PLAN_REQUESTED',
+    userId,
+    name,
+    startYear
+});
+
+export const selectPlan = (plan) => ({
+    type: 'SELECT_PLAN',
+    plan
+});

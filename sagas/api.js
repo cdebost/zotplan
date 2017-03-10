@@ -32,3 +32,10 @@ export function signIn(email, password) {
     req.setRequestHeader('Content-Type', 'application/json');
     return promisifySend(req, { email, password });
 }
+
+export function createPlan(userId, name, startYear) {
+    const req = new XMLHttpRequest();
+    req.open('POST', `${baseUrl}/api/user/${userId}/plan`);
+    req.setRequestHeader('Content-Type', 'application/json');
+    return promisifySend(req, { name, startYear });
+}

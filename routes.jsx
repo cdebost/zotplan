@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import { App, Home, NotFound, Onboarding } from './containers';
+import { App, Home, NotFound, Onboarding, Plan } from './containers';
 import { fetchOwnUser } from './actions';
 
 export default (store) => {
@@ -19,9 +19,10 @@ export default (store) => {
 
             <Route onEnter={requireLogin} component={App}>
                 <IndexRoute component={Home}/>
-            </Route>
+                <Route path="user/:user_id/plan/:plan_id" component={Plan} />
 
-            <Route path="*" component={NotFound} status={404}/>
+                <Route path="*" component={NotFound} status={404}/>
+            </Route>
         </Route>
     );
 }

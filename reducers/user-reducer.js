@@ -1,7 +1,8 @@
 const initialState = {
     user: null,
     isSignInPending: false,
-    isCreatingPlan: false
+    isCreatingPlan: false,
+    selectedPlan: null
 };
 
 export default function userReducer(state = initialState, action) {
@@ -28,6 +29,27 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 isSignInPending: false,
                 errorMessage: action.message
+            };
+
+        case 'SELECT_PLAN':
+            return {
+                ...state,
+                selectedPlan: action.plan
+            };
+
+        case 'CREATE_PLAN_REQUESTED':
+            return {
+                ...state,
+                isCreatingPlan: true
+            };
+        case 'CREATE_PLAN_SUCEEDED':
+            return {
+                ...state,
+                isCreatingPlan: false,
+                user: {
+                    ...user,
+                    plans: user.plans.concat([action.plan])
+                }
             };
         default:
             return state;

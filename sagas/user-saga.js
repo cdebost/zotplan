@@ -20,7 +20,17 @@ function* signIn(action) {
     }
 }
 
+function* createPlan(action) {
+    try {
+        const plan = yield call(Api.createPlan, action.userId, action.name, action.startYear);
+        yield put({ type: 'CREATE_PLAN_SUCCEEDED', plan });
+    } catch (e) {
+        yield put({ type: 'CREATE_PLAN_FAILED', message: JSON.stringify(e).message });
+    }
+}
+
 export default function*() {
     yield takeLatest('FETCH_OWN_USER_REQUESTED', fetchOwnUser);
     yield takeLatest('SIGN_IN_REQUESTED', signIn);
+    yield takeEvery('CREATE_PLAN_REQUESTED', createPlan);
 }
