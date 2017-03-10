@@ -23,7 +23,7 @@ const userSchema = new Mongoose.Schema({
 
 userSchema.virtual('safeProps')
     .get(function () {
-        return { id: this._id, name: this.name, email: this.email, plans: this.plans };
+        return { _id: this._id, name: this.name, email: this.email, plans: this.plans };
     });
 
 export default Mongoose.model('User', userSchema);
