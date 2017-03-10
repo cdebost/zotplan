@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Onboarding.css';
-import { signIn } from '../actions/auth-actions';
+import { signIn } from '../actions';
 
 const mapStateToProps = state => ({
-    errorMessage: state.auth.errorMessage
+    errorMessage: state.user.errorMessage
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +22,7 @@ class Onboarding extends React.Component {
     componentDidMount() {
         const { store, router } = this.context;
         const unsubscribe = store.subscribe(()=> {
-            if (store.getState().auth.user) {
+            if (store.getState().user.user) {
                 unsubscribe();
                 router.replace('/');
             }

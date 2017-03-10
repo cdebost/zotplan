@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Menu.css';
 import UserMenuHeader from '../components/MenuUserHeader.jsx';
-import { closeMenu, togglePlansExpanded } from '../actions/menu-actions.js';
+import { closeMenu, togglePlansExpanded } from '../actions';
 import { push } from 'react-router-redux';
 import MenuListItem from '../components/MenuListItem.jsx';
 
 const mapStateToProps = state => ({
     isVisible: state.menu.isVisible,
     isPlansExpanded: state.menu.isPlansExpanded,
-    user: state.auth.user
+    user: state.user.user
 });
 
 const mapDispatchToProps = dispatch => ({

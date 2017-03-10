@@ -1,8 +1,8 @@
 import { fork } from 'redux-saga/effects';
-import auth from './auth-saga.js';
+import user from './user-saga.js';
 
 export default function* () {
     yield [
-        fork(auth)
+        fork(user)
     ];
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Header from '../../components/Header.jsx';
 import Menu from '../Menu.jsx';
-import { toggleMenu, closeMenu } from '../../actions/menu-actions.js';
+import { toggleMenu, closeMenu } from '../../actions';
 
 const mapStateToProps = state => ({
 });

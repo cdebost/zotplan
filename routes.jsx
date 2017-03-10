@@ -1,10 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { App, Home, NotFound, Onboarding } from './containers';
+import { fetchOwnUser } from './actions';
 
 export default (store) => {
     const requireLogin = (nextState, replace, cb) => {
-        const { auth: { user }} = store.getState();
+        store.dispatch(fetchOwnUser());
+        const { user: { user }} = store.getState();
         if (!user) {
             replace('/login');
         }
