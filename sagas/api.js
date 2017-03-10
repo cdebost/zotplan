@@ -17,7 +17,7 @@ function promisifySend(request, body) {
     });
 }
 
-const baseUrl = 'http://localhost:8000';
+const baseUrl = location.protocol + '//' + location.hostname + ':8000';
 
 export function signIn(email, password) {
     const req = new XMLHttpRequest();
