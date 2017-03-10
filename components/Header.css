@@ -10,3 +10,8 @@
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
     display: flex;
 }
+
+.icon:hover {
+    border-radius: 6px;
+    background-color: rgba(177,177,177,.35);
+}
