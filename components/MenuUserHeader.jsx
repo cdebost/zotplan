@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './UserMenuHeader.css';
+import styles from './MenuUserHeader.css';
 
 export default ({ user }) => {
     return (
