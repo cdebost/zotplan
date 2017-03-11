@@ -22,7 +22,7 @@ export default ({ googleAuthClient }) => {
             return res.status(400).send({ error: 'Invalid password' });
         }
         req.session.userId = user.id;
-        res.send(user.safeProps);
+        res.redirect('../user');
     });
 
     async function verifyGoogleIdToken(token) {

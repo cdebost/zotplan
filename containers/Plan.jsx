@@ -37,7 +37,7 @@ class Plan extends React.Component {
                                        backgroundColor={['#F7DFC3', '#D8DAD6', '#EDEDCD'][quarterNumber]}
                             >
                                 { quarter.courses.map(course =>
-                                    <Course key={String(year)+quarter+course._id} course={course} />
+                                    <Course key={String(yearNumber)+quarterNumber+course._id} course={course} />
                                 )}
                             </PlanGroup>
                         )}
