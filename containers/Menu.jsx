@@ -24,7 +24,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch(togglePlansExpanded());
     },
     onClickPlan: (user, plan) => {
-        dispatch(selectPlan(plan));
         dispatch(push(`/user/${user._id}/plan/${plan._id}`));
         dispatch(closeMenu());
     },

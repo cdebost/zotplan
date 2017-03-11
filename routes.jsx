@@ -24,7 +24,7 @@ export default (store) => {
 
             <Route onEnter={requireLogin} component={App}>
                 <IndexRoute component={Home}/>
-                <Route path="user/:user_id/plan/:plan_id" component={Plan} />
+                <Route path="user/:userId/plan/:planId" component={Plan} />
 
                 <Route path="*" component={NotFound} status={404}/>
             </Route>

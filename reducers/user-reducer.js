@@ -1,8 +1,7 @@
 const initialState = {
     user: null,
     isSignInPending: false,
-    isCreatingPlan: false,
-    selectedPlan: null
+    isCreatingPlan: false
 };
 
 export default function userReducer(state = initialState, action) {
@@ -29,12 +28,6 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 isSignInPending: false,
                 errorMessage: action.message
-            };
-
-        case 'SELECT_PLAN':
-            return {
-                ...state,
-                selectedPlan: action.plan
             };
 
         case 'CREATE_PLAN_REQUESTED':

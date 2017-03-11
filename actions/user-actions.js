@@ -25,8 +25,3 @@ export const createNewPlan = (userId, name, startYear) => ({
     name,
     startYear
 });
-
-export const selectPlan = (plan) => ({
-    type: 'SELECT_PLAN',
-    plan
-});

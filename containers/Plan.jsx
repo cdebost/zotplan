@@ -5,7 +5,7 @@ import PlanGroup from '../components/plan-view/PlanGroup.jsx';
 import Course from '../components/plan-view/Course.jsx';
 
 const mapStateToProps = store => ({
-    plan: store.user.selectedPlan
+    user: store.user.user
 });
 
 class Plan extends React.Component {
@@ -19,9 +19,8 @@ class Plan extends React.Component {
     }
 
     render() {
-        const {
-            plan
-        } = this.props;
+        const { user, params } = this.props;
+        const plan = user.plans.filter(plan => plan._id === params.planId)[0];
         const quarterNames = ['Fall', 'Winter', 'Spring', 'Summer'];
         return (
             <div>
