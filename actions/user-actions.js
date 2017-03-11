@@ -12,6 +12,13 @@ export const signIn = (email, password, successCb, failureCb) => {
     };
 };
 
+export const signInSucceeded = (user) => {
+    return {
+        type: 'SIGN_IN_SUCCEEDED',
+        user
+    };
+};
+
 export const createNewPlan = (userId, name, startYear) => ({
     type: 'CREATE_PLAN_REQUESTED',
     userId,

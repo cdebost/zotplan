@@ -5,12 +5,17 @@ import { fetchOwnUser } from './actions';
 
 export default (store) => {
     const requireLogin = (nextState, replace, cb) => {
+        const { user } = store.getState().user;
+        if (user) return cb();
         store.dispatch(fetchOwnUser());
-        const { user: { user }} = store.getState();
-        if (!user) {
-            replace('/login');
-        }
-        cb();
+        const unsubscribe = store.subscribe(() => {
+            const state = store.getState();
+            if (!state.user.isSignInPending) {
+                unsubscribe();
+                if (!state.user.user) replace('/login');
+                cb();
+            }
+        });
     };
 
     return (
