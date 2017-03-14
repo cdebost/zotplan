@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../../components/Header.jsx';
-import Menu from '../Menu.jsx';
-import { toggleMenu } from '../../actions';
+import Header from '../components/Header';
+import Menu from './Menu';
+import { toggleMenu } from '../actions';
 
 const mapDispatchToProps = dispatch => ({
   onHamburgerClick: () => {

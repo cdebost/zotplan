@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import styles from './Menu.css';
-import UserMenuHeader from '../components/MenuUserHeader.jsx';
+import UserMenuHeader from '../components/MenuUserHeader';
 import { closeMenu, togglePlansExpanded, createNewPlan } from '../actions';
-import MenuListItem from '../components/MenuListItem.jsx';
+import MenuListItem from '../components/MenuListItem';
 
 const mapStateToProps = state => ({
   isVisible: state.menu.isVisible,

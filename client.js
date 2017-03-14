@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 
-import routes from './routes.jsx';
+import routes from './routes';
 import * as reducers from './reducers';
 import saga from './sagas';
 

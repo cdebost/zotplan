@@ -21,6 +21,7 @@
       "no-underscore-dangle": 0,
       "no-use-before-define": 0,
       "max-len": [2, 100],
-      "quote-props": [2, "consistent-as-needed"]
+      "quote-props": [2, "consistent-as-needed"],
+      "react/jsx-filename-extension": 0
     }
 }

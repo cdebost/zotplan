@@ -64,8 +64,18 @@ class Onboarding extends React.Component {
         <div className="card" style={{ margin: '50px 30px', padding: 16 }}>
           <h1>ZotPlan</h1>
           <form onSubmit={this.trySignIn}>
-            <input type="email" onChange={this.handleEmailChange} placeholder="Email" className={styles.field} />
-            <input type="password" onChange={this.handlePasswordChange} placeholder="Password" className={styles.field} />
+            <input
+              type="email"
+              onChange={this.handleEmailChange}
+              placeholder="Email"
+              className={styles.field}
+            />
+            <input
+              type="password"
+              onChange={this.handlePasswordChange}
+              placeholder="Password"
+              className={styles.field}
+            />
             <p style={{ color: 'red' }}>{this.props.errorMessage}</p>
             <button className={styles.submit}>Sign In</button>
           </form>

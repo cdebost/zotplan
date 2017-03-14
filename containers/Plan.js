@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PlanGroup from '../components/plan-view/PlanGroup.jsx';
-import Course from '../components/plan-view/Course.jsx';
+import PlanGroup from '../components/plan-view/PlanGroup';
+import Course from '../components/plan-view/Course';
 
 const mapStateToProps = store => ({
   user: store.user.user,
