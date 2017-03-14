@@ -1,11 +1,11 @@
 export const toggleMenu = () => ({
-    type: 'TOGGLE_MENU'
+  type: 'TOGGLE_MENU',
 });
 
 export const closeMenu = () => ({
-    type: 'CLOSE_MENU'
+  type: 'CLOSE_MENU',
 });
 
 export const togglePlansExpanded = () => ({
-    type: 'TOGGLE_PLANS_EXPANDED'
+  type: 'TOGGLE_PLANS_EXPANDED',
 });

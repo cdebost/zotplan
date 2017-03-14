@@ -12,7 +12,7 @@
     "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
     "test": "NODE_ENV=test scripts/test.sh",
-    "crawler": "node dist/crawler"
+    "crawler": "babel-node crawler"
   },
   "repository": {
     "type": "git",
@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/cdebost/zotplan#readme",
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
+    "cheerio": "^0.22.0",
     "express": "^4.14.0",
     "express-session": "^1.15.0",
     "google-auth-library": "^0.10.0",
@@ -38,11 +40,13 @@
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.4.0",
     "babel-polyfill": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
@@ -53,6 +57,12 @@
     "chai": "^3.5.0",
     "cheerio": "^0.22.0",
     "css-loader": "^0.26.4",
+    "eslint": "^3.17.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-mocha": "^4.8.0",
+    "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
@@ -60,7 +70,6 @@
     "request": "^2.79.0",
     "style-loader": "^0.13.2",
     "supertest": "^2.0.1",
-    "url-parse": "^1.1.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   }

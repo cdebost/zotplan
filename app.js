@@ -5,20 +5,20 @@ import path from 'path';
 import api from './api';
 
 export default ({ port, dbName, googleAuthClient }) => {
-    const app = express();
+  const app = express();
 
-    Mongoose.Promise = global.Promise;
-    Mongoose.connect(dbName);
+  Mongoose.Promise = global.Promise;
+  Mongoose.connect(dbName);
 
-    app.use('/api', api({ googleAuthClient }));
+  app.use('/api', api({ googleAuthClient }));
 
-    app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public')));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-    });
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+  });
 
-    app.server = app.listen(port);
+  app.server = app.listen(port);
 
-    return app;
-}
+  return app;
+};

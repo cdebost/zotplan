@@ -9,6 +9,17 @@
     font-size: 14px;
 }
 
+.transparentButton {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+}
+.transparentButton:focus {
+    outline: none;
+}
+
 .font-light {
     font-weight: 300;
 }

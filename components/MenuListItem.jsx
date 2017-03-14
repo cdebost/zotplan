@@ -1,22 +1,31 @@
 import React from 'react';
 import styles from './MenuListItem.css';
 
-const MenuListItem = ({label, iconName, extraContent, indents = 0, onClick}) => {
-    return (
-        <div onClick={onClick} className={styles.container} style={{ display: 'flex', padding: 16, marginLeft: indents * 50 }}>
-            <i className="material-icons" style={{ width: 50, color: '#757575' }}>{iconName}</i>
-            <span className={styles.label}>{label}</span>
-            { extraContent }
-        </div>
-    );
+export default function MenuListItem({ label, iconName, extraContent, indents, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`transparentButton ${styles.container}`}
+      style={{ marginLeft: indents * 50 }}
+    >
+      <i className={`material-icons ${styles.icon}`}>{iconName}</i>
+      <span className={styles.label}>{label}</span>
+      { extraContent }
+    </button>
+  );
 }
 
-MenuListItem.PropTypes = {
-    label: React.PropTypes.string.isRequired,
-    iconName: React.PropTypes.string,
-    extraContent: React.PropTypes.element,
-    indents: React.PropTypes.number,
-    onClick: React.PropTypes.func
+MenuListItem.propTypes = {
+  label: React.PropTypes.string.isRequired,
+  iconName: React.PropTypes.string,
+  extraContent: React.PropTypes.element,
+  indents: React.PropTypes.number,
+  onClick: React.PropTypes.func,
 };
 
-export default MenuListItem;
+MenuListItem.defaultProps = {
+  iconName: '',
+  extraContent: null,
+  indents: 0,
+  onClick: Function.noop,
+};

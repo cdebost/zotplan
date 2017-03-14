@@ -1,31 +1,28 @@
-'use strict';
-
 import 'babel-polyfill';
-import { scrape } from './catalogue-scraper.js';
-import { interpret } from './course-interpreter.js';
-import { work } from './mongo-worker.js';
+import scrape from './catalogue-scraper';
+import interpret from './course-interpreter';
+import work from './mongo-worker';
 
-const SCHOOLS = require('./schools.json')
+const SCHOOLS = require('./schools.json');
 
-const main = async function () {
-    try {
-        let data = {};
-        for (const s in SCHOOLS) {
-            const school = SCHOOLS[s];
-            const departments = await scrape(school.courseInventoryUrl, school.name);
-            for (const d in departments) {
-                const department = departments[d];
-                interpret(department, d);
-            }
-            data[school.name] = departments;
-        }
-        await work(data);
-        console.log('Completed successfully');
-        process.exit();
-    } catch (err) {
-        console.error(err, err.stack)
-        console.error('Completed with errors');
-        process.exit(1);
-    }
-}
-main()
+const main = async () => {
+  try {
+    const schoolDataPromises = Object.values(SCHOOLS).map(school => (
+        scrape(school.courseInventoryUrl, school.name)
+    ));
+    const schoolData = await Promise.all(schoolDataPromises);
+
+    const departments = {};
+    schoolData.forEach(schoolDepts => Object.assign(departments, schoolDepts));
+    Object.entries(departments).forEach(interpret);
+
+    await work(departments);
+    console.log('Completed successfully');
+    process.exit();
+  } catch (err) {
+    console.error(err, err.stack);
+    console.error('Completed with errors');
+    process.exit(1);
+  }
+};
+main();

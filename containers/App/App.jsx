@@ -3,32 +3,27 @@ import { connect } from 'react-redux';
 
 import Header from '../../components/Header.jsx';
 import Menu from '../Menu.jsx';
-import { toggleMenu, closeMenu } from '../../actions';
-
-const mapStateToProps = state => ({
-});
+import { toggleMenu } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-    onHamburgerClick: () => {
-        dispatch(toggleMenu());
-    }
+  onHamburgerClick: () => {
+    dispatch(toggleMenu());
+  },
 });
 
-class App extends React.Component {
-    static propTypes = {
-        children: React.PropTypes.object.isRequired
-    };
+const App = ({ onHamburgerClick, children }) => (
+  <div id="app-view">
+    <Header onHamburgerClick={onHamburgerClick} />
+    <Menu />
+    <div style={{ position: 'relative', top: '56px' }}>
+      {children}
+    </div>
+  </div>
+);
 
-    render() {
-        return (
-            <div id="app-view">
-                <Header onHamburgerClick={this.props.onHamburgerClick} />
-                <Menu />
-                <div style={{position: 'relative', top: '56px'}}>
-                    {this.props.children}
-                </div>
-            </div>
-        );
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+App.propTypes = {
+  onHamburgerClick: React.PropTypes.func.isRequired,
+  children: React.PropTypes.element.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(App);
