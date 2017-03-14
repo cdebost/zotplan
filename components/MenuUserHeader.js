@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './MenuUserHeader.css';
+import PropTypes from '../validators';
 
 export default function MenuUserHeader({ user }) {
   return (
@@ -17,5 +18,5 @@ export default function MenuUserHeader({ user }) {
 }
 
 MenuUserHeader.propTypes = {
-  user: React.PropTypes.object.isRequired,
+  user: PropTypes.user.isRequired,
 };

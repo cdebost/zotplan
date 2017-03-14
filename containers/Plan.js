@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import PlanGroup from '../components/plan-view/PlanGroup';
 import Course from '../components/plan-view/Course';
+import PropTypes from '../validators';
 
 const mapStateToProps = store => ({
   user: store.user.user,
@@ -11,7 +11,7 @@ const mapStateToProps = store => ({
 class Plan extends React.Component {
 
   static propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: PropTypes.user.isRequired,
     params: React.PropTypes.object.isRequired,
   };
 

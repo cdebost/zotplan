@@ -5,6 +5,7 @@ import styles from './Menu.css';
 import UserMenuHeader from '../components/MenuUserHeader';
 import { closeMenu, togglePlansExpanded, createNewPlan } from '../actions';
 import MenuListItem from '../components/MenuListItem';
+import PropTypes from '../validators';
 
 const mapStateToProps = state => ({
   isVisible: state.menu.isVisible,
@@ -72,12 +73,16 @@ const Menu = ({
               key={plan._id}
               label={plan.name}
               indents={1}
-              onClick={onClickPlan.bind(null, user, plan)}
+              onClick={onClickPlan}
+              onClickArgs={[user, plan]}
             />,
           )}
           <MenuListItem
-            label="Create a New Plan" iconName="add" indents={1}
-            onClick={onClickCreateNewPlan.bind(null, user._id, 'New Plan', 2014)}
+            label="Create a New Plan"
+            iconName="add"
+            indents={1}
+            onClick={onClickCreateNewPlan}
+            onClickArgs={[user._id, 'New Plan', 2014]}
           />
         </div>
       }
@@ -93,7 +98,7 @@ Menu.propTypes = {
   isVisible: React.PropTypes.bool.isRequired,
   dispatchCloseMenu: React.PropTypes.func.isRequired,
   isPlansExpanded: React.PropTypes.bool.isRequired,
-  user: React.PropTypes.object.isRequired,
+  user: PropTypes.user.isRequired,
   onClickHome: React.PropTypes.func.isRequired,
   onClickMyPlans: React.PropTypes.func.isRequired,
   onClickPlan: React.PropTypes.func.isRequired,

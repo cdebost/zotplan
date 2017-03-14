@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Course.css';
+import PropTypes from '../../validators';
 
 export default function Course({ course }) {
   return (
@@ -12,5 +13,5 @@ export default function Course({ course }) {
 }
 
 Course.propTypes = {
-  course: React.PropTypes.object.isRequired,
+  course: PropTypes.course.isRequired,
 };

@@ -11,6 +11,7 @@
     "build:server": "webpack --config webpack.server.config.js",
     "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
+    "lint": "./node_modules/.bin/eslint . || true",
     "test": "NODE_ENV=test scripts/test.sh",
     "crawler": "babel-node crawler"
   },
