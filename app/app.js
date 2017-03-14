@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import express from 'express';
 import Mongoose from 'mongoose';
 import path from 'path';
-import api from './api';
+import api from '../api';
 
 export default ({ port, dbName, googleAuthClient }) => {
   const app = express();

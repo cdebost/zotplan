@@ -1,5 +1,5 @@
 import express from 'express';
-import Course from '../models/course';
+import Course from '../shared/models/course';
 
 export default () => {
   const router = express.Router();

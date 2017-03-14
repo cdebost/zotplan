@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../models/user';
+import User from '../shared/models/user';
 
 /**
  * The callback called by express when a request to / (i.e. /api/user/) is made. Exporting this

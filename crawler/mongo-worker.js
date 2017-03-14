@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
-const Department = require('../models/department.js');
-const Course = require('../models/course.js');
+const Department = require('../shared/models/department.js');
+const Course = require('../shared/models/course.js');
 
 export default async (departmentsData) => {
   console.log('Connecting to MongoDB');

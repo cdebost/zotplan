@@ -3,11 +3,11 @@ const path = require('path');
 
 module.exports = {
 
-  entry: path.resolve(__dirname, 'server.js'),
+  entry: path.resolve(__dirname, 'app', 'server.js'),
 
   output: {
     filename: 'server.bundle.js',
-    path: __dirname,
+    path: path.resolve(__dirname, 'app'),
   },
 
   target: 'node',

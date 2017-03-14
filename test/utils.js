@@ -1,6 +1,6 @@
 import Mongoose from 'mongoose';
 import request from 'supertest';
-import App from '../app';
+import App from '../app/app';
 import GoogleClientMock from './mocks/google-client-mock';
 
 /* eslint import/prefer-default-export: 0 */

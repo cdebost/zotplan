@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import express from 'express';
-import User from '../models/user';
+import User from '../shared/models/user';
 import { userRequestCallback } from './user';
 
 export default ({ googleAuthClient }) => {
