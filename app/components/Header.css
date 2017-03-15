@@ -12,13 +12,13 @@
 }
 
 .icon {
-  border: none;
-  background-color: transparent;
+    border: none;
+    background-color: transparent;
 }
 .icon:hover {
     border-radius: 6px;
     background-color: rgba(177,177,177,.35);
 }
 .icon:focus {
-  outline: none;
+    outline: none;
 }
