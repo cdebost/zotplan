@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    white-space: nowrap;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    background-color: white;
+    padding: 12px;
+}
+
+.container > * + * {
+    margin-left: 12px;
+}
+
+.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 1;
+}

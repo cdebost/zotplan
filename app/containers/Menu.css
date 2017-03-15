@@ -1,0 +1,39 @@
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 15;
+    transition: background-color 0.5s ease;
+    pointer-events: none;
+}
+.visibleBackground {
+    background-color: rgba(0,0,0,.50);
+    pointer-events: all;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 16;
+    width: calc(100% - 56px);
+    transition: transform 0.5s ease;
+    background-color: white;
+    box-shadow: 0 0 4px rgba(0,0,0,.28);
+    overflow-y: auto;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #E4E4E4;
+    margin: 8px 0;
+}
+
+.myPlansExpandIcon {
+    float: right;
+    transition: transform 0.3s ease;
+}

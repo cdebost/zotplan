@@ -1,0 +1,28 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import",
+        "mocha"
+    ],
+    "parser": "babel-eslint",
+    "globals": {
+        "window": true,
+        "document": true,
+        "location": true,
+        "XMLHttpRequest": true
+    },
+    "rules": {
+      "consistent-return": 0,
+      "no-cond-assign": [2, "except-parens"],
+      "no-param-reassign": 0,
+      "no-plusplus": 0,
+      "no-underscore-dangle": 0,
+      "no-use-before-define": 0,
+      "max-len": [2, 100],
+      "quote-props": [2, "consistent-as-needed"],
+      "react/forbid-prop-types": [2, { "forbid": ["any", "array"] }],
+      "react/jsx-filename-extension": 0
+    }
+}

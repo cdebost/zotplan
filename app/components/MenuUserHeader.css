@@ -1,0 +1,19 @@
+.container {
+    padding: 24px 16px 8px 16px;
+    background-color: var(--uci-yellow);
+    border-bottom: 1px solid #E4E4E4;
+    color: #757575;
+}
+
+.icon {
+    margin-top: 16px;
+    width: 64px;
+    height: 64px;
+}
+
+.subtitle {
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

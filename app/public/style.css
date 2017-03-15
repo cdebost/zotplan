@@ -1,0 +1,45 @@
+:root {
+    --uci-yellow: #FED105;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.transparentButton {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+}
+.transparentButton:focus {
+    outline: none;
+}
+
+.font-light {
+    font-weight: 300;
+}
+.font-regular {
+    font-weight: 400;
+}
+.font-medium {
+    font-weight: 500;
+}
+.font-bold {
+    font-weight: 700;
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+}

@@ -1,0 +1,19 @@
+.container {
+    border: 1px solid black;
+}
+
+.header {
+    display: flex;
+    padding: 12px;
+}
+
+.expandButton {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.label {
+    flex: 1;
+}
