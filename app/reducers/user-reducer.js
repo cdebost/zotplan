@@ -30,6 +30,12 @@ export default function userReducer(state = initialState, action) {
         errorMessage: action.message,
       };
 
+    case 'SIGN_OUT_REQUESTED':
+      return {
+        ...state,
+        user: null,
+      };
+
     case 'CREATE_PLAN_REQUESTED':
       return {
         ...state,

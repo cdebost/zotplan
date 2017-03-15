@@ -13,6 +13,10 @@ export const signInSucceeded = user => ({
   user,
 });
 
+export const signOut = () => ({
+  type: 'SIGN_OUT_REQUESTED',
+});
+
 export const createNewPlan = (userId, name, startYear) => ({
   type: 'CREATE_PLAN_REQUESTED',
   userId,

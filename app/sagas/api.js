@@ -32,6 +32,13 @@ export function signIn(email, password) {
   return promisifySend(req, { email, password });
 }
 
+export function signOut() {
+  const req = new XMLHttpRequest();
+  req.open('DELETE', `${baseUrl}/api/auth`);
+  req.setRequestHeader('Content-Type', 'application/json');
+  return promisifySend(req);
+}
+
 export function createPlan(userId, name, startYear) {
   const req = new XMLHttpRequest();
   req.open('POST', `${baseUrl}/api/user/${userId}/plan`);

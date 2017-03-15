@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import styles from './Menu.css';
 import UserMenuHeader from '../components/MenuUserHeader';
-import { closeMenu, togglePlansExpanded, createNewPlan } from '../actions';
+import {
+  closeMenu,
+  toggleUserHeaderExpanded,
+  togglePlansExpanded,
+  signOut,
+  createNewPlan,
+  openModal,
+} from '../actions';
 import MenuListItem from '../components/MenuListItem';
 import PropTypes from '../validators';
 
 const mapStateToProps = state => ({
   isVisible: state.menu.isVisible,
+  isUserHeaderExpanded: state.menu.isUserHeaderExpanded,
   isPlansExpanded: state.menu.isPlansExpanded,
   user: state.user.user,
 });
@@ -16,6 +24,25 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   dispatchCloseMenu: () => {
     dispatch(closeMenu());
+  },
+  onClickExpandUser: () => {
+    dispatch(toggleUserHeaderExpanded());
+  },
+  onClickSignOut: () => {
+    dispatch(toggleUserHeaderExpanded());
+    dispatch(closeMenu());
+    dispatch(openModal({
+      title: 'Sign Out',
+      content: <div>Are you sure you want to sign out?</div>,
+      acceptButtonLabel: 'Yes',
+      canDismiss: false,
+      cb: (result) => {
+        if (result) {
+          dispatch(signOut());
+          dispatch(push('/login'));
+        }
+      },
+    }));
   },
   onClickHome: () => {
     dispatch(push('/'));
@@ -38,8 +65,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Menu = ({
-  dispatchCloseMenu, isVisible, isPlansExpanded, user, onClickHome, onClickMyPlans, onClickPlan,
-  onClickCreateNewPlan, onClickSettings,
+  dispatchCloseMenu, isVisible, isPlansExpanded, user, isUserHeaderExpanded, onClickExpandUser,
+  onClickSignOut, onClickHome, onClickMyPlans, onClickPlan, onClickCreateNewPlan, onClickSettings,
 }) => (
   <div>
     <button
@@ -52,7 +79,12 @@ const Menu = ({
       className={styles.container}
       style={{ transform: `translateX(${isVisible ? 0 : '-101%'})` }}
     >
-      <UserMenuHeader user={user} />
+      <UserMenuHeader
+        user={user}
+        isExpanded={isUserHeaderExpanded}
+        onClickExpand={onClickExpandUser}
+        onClickSignOut={onClickSignOut}
+      />
 
       <MenuListItem label="Home" iconName="home" onClick={onClickHome} />
       <MenuListItem
@@ -97,6 +129,9 @@ const Menu = ({
 Menu.propTypes = {
   isVisible: React.PropTypes.bool.isRequired,
   dispatchCloseMenu: React.PropTypes.func.isRequired,
+  isUserHeaderExpanded: React.PropTypes.bool.isRequired,
+  onClickExpandUser: React.PropTypes.func.isRequired,
+  onClickSignOut: React.PropTypes.func.isRequired,
   isPlansExpanded: React.PropTypes.bool.isRequired,
   user: PropTypes.user.isRequired,
   onClickHome: React.PropTypes.func.isRequired,

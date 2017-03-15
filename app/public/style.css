@@ -15,6 +15,7 @@
     padding: 0;
     background-color: transparent;
     border: 0;
+    color: inherit;
 }
 .transparentButton:focus {
     outline: none;

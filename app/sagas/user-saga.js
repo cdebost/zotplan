@@ -19,6 +19,14 @@ function* signIn(action) {
   }
 }
 
+function* signOut() {
+  try {
+    yield call(Api.signOut);
+  } catch (e) {
+    // No need to do anything
+  }
+}
+
 function* createPlan(action) {
   try {
     const plan = yield call(Api.createPlan, action.userId, action.name, action.startYear);
@@ -31,5 +39,6 @@ function* createPlan(action) {
 export default function* () {
   yield takeLatest('FETCH_OWN_USER_REQUESTED', fetchOwnUser);
   yield takeLatest('SIGN_IN_REQUESTED', signIn);
+  yield takeLatest('SIGN_OUT_REQUESTED', signOut);
   yield takeEvery('CREATE_PLAN_REQUESTED', createPlan);
 }

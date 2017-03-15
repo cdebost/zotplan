@@ -13,11 +13,11 @@ export default class MenuListItem extends React.Component {
   }
 
   render() {
-    const { label, iconName, extraContent, indents } = this.props;
+    const { label, iconName, extraContent, indents, isFlipped } = this.props;
     return (
       <button
         onClick={this.onClick}
-        className={`transparentButton ${styles.container}`}
+        className={`transparentButton ${styles.container} ${isFlipped ? styles.flipped : ''}`}
         style={{ marginLeft: indents * 50 }}
       >
         <i className={`material-icons ${styles.icon}`}>{iconName}</i>
@@ -35,6 +35,7 @@ MenuListItem.propTypes = {
   indents: React.PropTypes.number,
   onClick: React.PropTypes.func,
   onClickArgs: React.PropTypes.arrayOf(React.PropTypes.any),
+  isFlipped: React.PropTypes.bool,
 };
 
 MenuListItem.defaultProps = {
@@ -43,4 +44,5 @@ MenuListItem.defaultProps = {
   indents: 0,
   onClick: Function.noop,
   onClickArgs: [],
+  isFlipped: false,
 };
