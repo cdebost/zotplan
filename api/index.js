@@ -11,6 +11,7 @@ export default ({ googleAuthClient }) => {
   router.use((req, res, next) => {
     // Allow connections from the webpack dev server
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, DELETE');
     res.header('Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept, Cookie');
     res.header('Access-Control-Allow-Credentials', 'true');

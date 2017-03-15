@@ -49,5 +49,10 @@ export default ({ googleAuthClient }) => {
     return res.send(user.safeProps);
   });
 
+  router.delete('/', (req, res) => {
+    req.session.userId = null;
+    res.send({ signedOut: true });
+  });
+
   return router;
 };

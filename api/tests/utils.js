@@ -54,6 +54,11 @@ export function describeApiTest(name, tests, shouldSignIn = true) {
             .post(...args)
             .set('Cookie', cookies);
         },
+        delete(...args) {
+          return req
+            .delete(...args)
+            .set('Cookie', cookies);
+        },
       };
     }
 

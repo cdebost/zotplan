@@ -36,15 +36,15 @@ describeApiTest('user route', (request) => {
       .expect(401, done);
   });
 
-  it('can POST to /api/user/:id/plan to create a new plan', (done) => {
+  it('can sign out', (done) => {
     request()
-      .post('/api/user/id1/plan')
-      .send({ name: 'A new plan', startYear: 2010 })
+      .delete('/api/auth')
       .expect(200)
-      .end((err, res) => {
+      .end((err) => {
         if (err) return done(err);
-        expect(res.body.name).to.equal('A new plan');
-        done();
+        request()
+          .get('/api/user')
+          .expect(401, done);
       });
   });
 
