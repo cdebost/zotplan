@@ -14,7 +14,7 @@ const App = ({ onHamburgerClick, children }) => (
   <div id="app-view">
     <AppBar title="ZotPlan" onLeftIconButtonTouchTap={onHamburgerClick} />
     <Menu />
-    <div style={{ position: 'relative', top: '56px' }}>
+    <div>
       {children}
     </div>
   </div>

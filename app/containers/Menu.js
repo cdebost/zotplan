@@ -138,6 +138,7 @@ class Menu extends React.Component {
                 <ListItem
                   key={plan._id}
                   primaryText={plan.name}
+                  insetChildren
                   onTouchTap={() => handleTapPlan(user, plan)}
                 />,
               ).concat([
