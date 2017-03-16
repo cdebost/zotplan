@@ -1,144 +1,181 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import styles from './Menu.css';
-import UserMenuHeader from '../components/MenuUserHeader';
+import Drawer from 'material-ui/Drawer';
+import { List, ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import Dialog from 'material-ui/Dialog';
+import Divider from 'material-ui/Divider';
 import {
   closeMenu,
-  toggleUserHeaderExpanded,
-  togglePlansExpanded,
   signOut,
   createNewPlan,
-  openModal,
+  openSignOutDialog,
+  closeSignOutDialog,
 } from '../actions';
-import MenuListItem from '../components/MenuListItem';
 import PropTypes from '../validators';
 
 const mapStateToProps = state => ({
   isVisible: state.menu.isVisible,
-  isUserHeaderExpanded: state.menu.isUserHeaderExpanded,
-  isPlansExpanded: state.menu.isPlansExpanded,
+  isSignOutDialogVisible: state.menu.isSignOutDialogVisible,
   user: state.user.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchCloseMenu: () => {
+  handleCloseMenu: () => {
     dispatch(closeMenu());
   },
-  onClickExpandUser: () => {
-    dispatch(toggleUserHeaderExpanded());
-  },
-  onClickSignOut: () => {
-    dispatch(toggleUserHeaderExpanded());
+  handleTapSignOut: () => {
     dispatch(closeMenu());
-    dispatch(openModal({
-      title: 'Sign Out',
-      content: <div>Are you sure you want to sign out?</div>,
-      acceptButtonLabel: 'Yes',
-      canDismiss: false,
-      cb: (result) => {
-        if (result) {
-          dispatch(signOut());
-          dispatch(push('/login'));
-        }
-      },
-    }));
+    dispatch(openSignOutDialog());
   },
-  onClickHome: () => {
+  handleSignOutCancel: () => {
+    dispatch(closeSignOutDialog());
+  },
+  handleSignOutConfirm: () => {
+    window.setTimeout(() => {
+      dispatch(closeSignOutDialog());
+      dispatch(push('/login'));
+      dispatch(signOut());
+    }, 200);
+  },
+  handleTapHome: () => {
+    dispatch(closeMenu());
     dispatch(push('/'));
+  },
+  handleTapPlan: (user, plan) => {
     dispatch(closeMenu());
-  },
-  onClickMyPlans: () => {
-    dispatch(togglePlansExpanded());
-  },
-  onClickPlan: (user, plan) => {
     dispatch(push(`/user/${user._id}/plan/${plan._id}`));
-    dispatch(closeMenu());
   },
-  onClickCreateNewPlan: (userId, name, startYear) => {
+  handleTapCreateNewPlan: (userId, name, startYear) => {
     dispatch(createNewPlan(userId, name, startYear));
   },
-  onClickSettings: () => {
-    dispatch(push('/settings'));
+  handleTapSettings: () => {
     dispatch(closeMenu());
+    dispatch(push('/settings'));
   },
 });
 
-const Menu = ({
-  dispatchCloseMenu, isVisible, isPlansExpanded, user, isUserHeaderExpanded, onClickExpandUser,
-  onClickSignOut, onClickHome, onClickMyPlans, onClickPlan, onClickCreateNewPlan, onClickSettings,
-}) => (
-  <div>
-    <button
-      onClick={dispatchCloseMenu}
-      className={`transparentButton ${styles.background}
-        ${isVisible ? styles.visibleBackground : ''}`
-      }
-    />
-    <aside
-      className={styles.container}
-      style={{ transform: `translateX(${isVisible ? 0 : '-101%'})` }}
-    >
-      <UserMenuHeader
-        user={user}
-        isExpanded={isUserHeaderExpanded}
-        onClickExpand={onClickExpandUser}
-        onClickSignOut={onClickSignOut}
-      />
+class Menu extends React.Component {
 
-      <MenuListItem label="Home" iconName="home" onClick={onClickHome} />
-      <MenuListItem
-        label="My Plans"
-        iconName="view_list"
-        onClick={onClickMyPlans}
-        extraContent={
-          <div
-            className={`material-icons ${styles.myPlansExpandIcon}`}
-            style={{ transform: `rotate(${isPlansExpanded ? '180deg' : 0})` }}
-          >expand_more</div>
-        }
-      />
-      { isPlansExpanded &&
-        <div>
-          { user.plans.map(plan =>
-            <MenuListItem
-              key={plan._id}
-              label={plan.name}
-              indents={1}
-              onClick={onClickPlan}
-              onClickArgs={[user, plan]}
-            />,
-          )}
-          <MenuListItem
-            label="Create a New Plan"
-            iconName="add"
-            indents={1}
-            onClick={onClickCreateNewPlan}
-            onClickArgs={[user._id, 'New Plan', 2014]}
+  static menuIcon(name) {
+    return (
+      <FontIcon className="material-icons" color="#757575">{name}</FontIcon>
+    );
+  }
+
+  constructor(props) {
+    super(props);
+    this.handleDrawerRequestChange = this.handleDrawerRequestChange.bind(this);
+  }
+
+  handleDrawerRequestChange(open) {
+    if (!open) {
+      this.props.handleCloseMenu();
+    }
+  }
+
+  render() {
+    const {
+      user, handleTapPlan, handleTapCreateNewPlan,
+    } = this.props;
+    return (
+      <Drawer
+        docked={false} open={this.props.isVisible} onRequestChange={this.handleDrawerRequestChange}
+      >
+        <List style={{ padding: '0 0 8px 0' }}>
+          <div style={{ backgroundColor: 'var(--uci-yellow)' }}>
+            <Avatar size={64} style={{ margin: '24px 16px 0 16px' }}>{user.name[0]}</Avatar>
+            <div style={{ fontWeight: 700, margin: 16, marginBottom: 0 }}>{user.name}</div>
+            <ListItem
+              primaryText={user.email}
+              disabled
+              nestedItems={[
+                <ListItem
+                  key="signout" primaryText="Sign Out" leftIcon={Menu.menuIcon('exit_to_app')}
+                  onTouchTap={this.props.handleTapSignOut}
+                />,
+                <Dialog
+                  key="dialog"
+                  title="Sign Out"
+                  modal
+                  open={this.props.isSignOutDialogVisible}
+                  actions={[
+                    <FlatButton
+                      label="Cancel"
+                      primary
+                      onTouchTap={this.props.handleSignOutCancel}
+                    />,
+                    <FlatButton
+                      label="Sign Out"
+                      labelPosition="before"
+                      secondary
+                      icon={Menu.menuIcon('exit_to_app')}
+                      onTouchTap={this.props.handleSignOutConfirm}
+                    />,
+                  ]}
+                >
+                  Are you sure you want to sign out?
+                </Dialog>,
+              ]}
+            />
+          </div>
+
+          <Divider />
+
+          <ListItem
+            primaryText="Home"
+            leftIcon={Menu.menuIcon('home')}
+            onTouchTap={this.props.handleTapHome}
           />
-        </div>
-      }
+          <ListItem
+            primaryText="My Plans"
+            leftIcon={Menu.menuIcon('view_list')}
+            nestedItems={
+              user.plans.map(plan =>
+                <ListItem
+                  key={plan._id}
+                  primaryText={plan.name}
+                  onTouchTap={() => handleTapPlan(user, plan)}
+                />,
+              ).concat([
+                <ListItem
+                  key="new"
+                  primaryText="Create a New Plan"
+                  leftIcon={Menu.menuIcon('add')}
+                  onTouchTap={() => handleTapCreateNewPlan(user._id, 'New Plan', 2014)}
+                />,
+              ])
+            }
+          />
 
-      <div className={styles.divider} />
+          <Divider />
 
-      <MenuListItem label="Settings" iconName="settings" onClick={onClickSettings} />
-    </aside>
-  </div>
-);
+          <ListItem
+            primaryText="Settings"
+            leftIcon={Menu.menuIcon('settings')}
+            onTouchTap={this.props.handleTapSettings}
+          />
+        </List>
+      </Drawer>
+    );
+  }
+}
 
 Menu.propTypes = {
   isVisible: React.PropTypes.bool.isRequired,
-  dispatchCloseMenu: React.PropTypes.func.isRequired,
-  isUserHeaderExpanded: React.PropTypes.bool.isRequired,
-  onClickExpandUser: React.PropTypes.func.isRequired,
-  onClickSignOut: React.PropTypes.func.isRequired,
-  isPlansExpanded: React.PropTypes.bool.isRequired,
+  handleCloseMenu: React.PropTypes.func.isRequired,
+  isSignOutDialogVisible: React.PropTypes.bool.isRequired,
+  handleTapSignOut: React.PropTypes.func.isRequired,
+  handleSignOutCancel: React.PropTypes.func.isRequired,
+  handleSignOutConfirm: React.PropTypes.func.isRequired,
   user: PropTypes.user.isRequired,
-  onClickHome: React.PropTypes.func.isRequired,
-  onClickMyPlans: React.PropTypes.func.isRequired,
-  onClickPlan: React.PropTypes.func.isRequired,
-  onClickCreateNewPlan: React.PropTypes.func.isRequired,
-  onClickSettings: React.PropTypes.func.isRequired,
+  handleTapHome: React.PropTypes.func.isRequired,
+  handleTapPlan: React.PropTypes.func.isRequired,
+  handleTapCreateNewPlan: React.PropTypes.func.isRequired,
+  handleTapSettings: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
