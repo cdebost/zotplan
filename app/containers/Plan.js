@@ -35,6 +35,7 @@ class Plan extends React.Component {
             key={yearNumber}
             label={String(plan.startYear + yearNumber)}
             totalUnits={Plan.totalYearUnits(year)}
+            style={{ margin: '0 16px' }}
           >
             { year.quarters.map((quarter, quarterNumber) =>
               <PlanGroup

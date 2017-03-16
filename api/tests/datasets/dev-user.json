@@ -1,1 +1,76 @@
-{ "_id": "dev", "accountType": "zotplan", "name": "Developer", "email": "dev@zotplan.com", "passwordHash": "$2a$10$y293.XA18EwDjqZwMZ4Cm.7fhp288pD/PeUwYagrxMngK58Y6l1Vm"}
+{ "_id": "dev", "accountType": "zotplan", "name": "Developer", "email": "dev@zotplan.com", "passwordHash": "$2a$10$y293.XA18EwDjqZwMZ4Cm.7fhp288pD/PeUwYagrxMngK58Y6l1Vm", "plans": [
+  { "_id": ObjectId("58cae0032dfcc30e854a2297"),
+    "name": "Main Plan",
+    "startYear": 2014,
+    "years": [
+    { "quarters": [
+      { "courses": [
+        "I&C SCI 31",
+        "I&C SCI 6D",
+        "I&C SCI 60",
+        "PSYCH 7A",
+        "I&C SCI 90"
+      ]}, { "courses": [
+        "I&C SCI 32",
+        "I&C SCI 6B",
+        "I&C SCI 61",
+        "PHYSICS 7C",
+        "PHYSICS 7LC",
+        "ECON 20A"
+      ]}, { "courses": [
+        "I&C SCI 33",
+        "IN4MATX 43",
+        "WRITING 39B",
+        "PHILO 1"
+      ]}
+    ]}, { "quarters": [
+      { "courses": [
+        "I&C SCI 45C",
+        "I&C SCI 51",
+        "I&C SCI 6N",
+        "FLM&MDA 85A"
+      ]}, { "courses": [
+        "I&C SCI 46",
+        "AFAM 40B",
+        "WRITING 39C"
+      ]}, { "courses": [
+        "COMPSCI 122A",
+        "I&C SCI 139W",
+        "BIO 38",
+        "STATS 67"
+      ]}
+    ]}, { "quarters": [
+      { "courses": [
+        "COMPSCI 143A",
+        "COMPSCI 132",
+        "IN4MATX 115"
+      ]}, { "courses": [
+        "COMPSCI 133",
+        "IN4MATX 131",
+        "I&C SCI 53",
+        "I&C SCI 53L"
+      ]}, { "courses": [
+        "COMPSCI 145",
+        "COMPSCI 145L",
+        "COMPSCI 146",
+        "COMPSCI 122B",
+        "PHYSICS 20C"
+      ]}
+    ]}, { "quarters": [
+      { "courses": [
+        "COMPSCI 151",
+        "COMPSCI 161",
+        "COMPSCI 171",
+        "COMPSCI 134"
+      ]}, { "courses": [
+        "COMPSCI 152",
+        "COMPSCI 178",
+        "COMPSCI 131"
+      ]}, { "courses": [
+        "COMPSCI 163",
+        "COMPSCI 154",
+        "COMPSCI 175"
+      ]}
+    ]}
+  ]}
+]}
