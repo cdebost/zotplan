@@ -6,10 +6,10 @@ export const closeMenu = () => ({
   type: 'CLOSE_MENU',
 });
 
-export const toggleUserHeaderExpanded = () => ({
-  type: 'TOGGLE_USER_HEADER_EXPANDED',
+export const openSignOutDialog = () => ({
+  type: 'OPEN_SIGN_OUT_DIALOG',
 });
 
-export const togglePlansExpanded = () => ({
-  type: 'TOGGLE_PLANS_EXPANDED',
+export const closeSignOutDialog = () => ({
+  type: 'CLOSE_SIGN_OUT_DIALOG',
 });

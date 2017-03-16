@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'material-ui/Card';
 import styles from './PlanGroup.css';
 
 export default class PlanGroup extends React.Component {
@@ -8,11 +9,13 @@ export default class PlanGroup extends React.Component {
     children: React.PropTypes.arrayOf(React.PropTypes.element),
     totalUnits: React.PropTypes.number.isRequired,
     backgroundColor: React.PropTypes.string,
+    style: React.PropTypes.object,
   };
 
   static defaultProps = {
     children: [],
     backgroundColor: 'white',
+    style: {},
   };
 
   constructor(props) {
@@ -31,7 +34,7 @@ export default class PlanGroup extends React.Component {
     const { label, children, totalUnits, backgroundColor } = this.props;
     const { isExpanded } = this.state;
     return (
-      <section className={styles.container} style={{ backgroundColor }}>
+      <Card style={{ backgroundColor, ...this.props.style }}>
         <header className={styles.header}>
           <button
             onClick={this.onToggleExpanded}
@@ -43,7 +46,7 @@ export default class PlanGroup extends React.Component {
         <div style={{ marginLeft: 20 }}>
           { isExpanded && children }
         </div>
-      </section>
+      </Card>
     );
   }
 }

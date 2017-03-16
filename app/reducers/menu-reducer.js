@@ -1,7 +1,6 @@
 const initialState = {
   isVisible: false,
-  isUserHeaderExpanded: false,
-  isPlansExpanded: false,
+  isSignOutDialogVisible: false,
 };
 
 export default function menuReducer(state = initialState, action) {
@@ -16,15 +15,15 @@ export default function menuReducer(state = initialState, action) {
         ...state,
         isVisible: false,
       };
-    case 'TOGGLE_USER_HEADER_EXPANDED':
+    case 'OPEN_SIGN_OUT_DIALOG':
       return {
         ...state,
-        isUserHeaderExpanded: !state.isUserHeaderExpanded,
+        isSignOutDialogVisible: true,
       };
-    case 'TOGGLE_PLANS_EXPANDED':
+    case 'CLOSE_SIGN_OUT_DIALOG':
       return {
         ...state,
-        isPlansExpanded: !state.isPlansExpanded,
+        isSignOutDialogVisible: false,
       };
     default:
       return state;

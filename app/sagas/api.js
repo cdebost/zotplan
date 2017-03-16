@@ -3,7 +3,7 @@ function promisifySend(request, body) {
     request.withCredentials = true;
     request.onload = () => {
       if (request.status !== 200) {
-        reject(new Error(request.response.error));
+        reject(new Error(JSON.parse(request.response).error));
       } else {
         resolve(JSON.parse(request.response));
       }
