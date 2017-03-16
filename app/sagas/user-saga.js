@@ -15,7 +15,7 @@ function* signIn(action) {
     const user = yield call(Api.signIn, action.email, action.password);
     yield put({ type: 'SIGN_IN_SUCCEEDED', user });
   } catch (e) {
-    yield put({ type: 'SIGN_IN_FAILED', message: JSON.stringify(e).message });
+    yield put({ type: 'SIGN_IN_FAILED', message: e.message });
   }
 }
 

@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import styles from './Onboarding.css';
 import { signIn } from '../actions';
 
@@ -59,27 +62,33 @@ class Onboarding extends React.Component {
   }
 
   render() {
+    const isEmailError = this.props.errorMessage &&
+      this.props.errorMessage.toLowerCase().includes('email');
     return (
       <div className={styles.background}>
-        <div className="card" style={{ margin: '50px 30px', padding: 16 }}>
-          <h1>ZotPlan</h1>
-          <form onSubmit={this.trySignIn}>
-            <input
-              type="email"
-              onChange={this.handleEmailChange}
-              placeholder="Email"
-              className={styles.field}
-            />
-            <input
-              type="password"
-              onChange={this.handlePasswordChange}
-              placeholder="Password"
-              className={styles.field}
-            />
-            <p style={{ color: 'red' }}>{this.props.errorMessage}</p>
-            <button className={styles.submit}>Sign In</button>
-          </form>
-        </div>
+        <Paper zDepth={2} className={styles.container}>
+          <h1>Sign In to ZotPlan</h1>
+          <TextField
+            type="email"
+            onChange={this.handleEmailChange}
+            hintText="Email"
+            style={{ width: '100%', margin: '16px 0' }}
+            errorText={isEmailError && this.props.errorMessage}
+          />
+          <TextField
+            type="password"
+            onChange={this.handlePasswordChange}
+            hintText="Password"
+            style={{ width: '100%', marginBottom: 16 }}
+            errorText={!isEmailError && this.props.errorMessage}
+          />
+          <RaisedButton
+            primary
+            label="Sign In"
+            onTouchTap={this.trySignIn}
+            style={{ width: '100%' }}
+          />
+        </Paper>
       </div>
     );
   }

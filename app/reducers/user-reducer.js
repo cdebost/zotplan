@@ -1,6 +1,7 @@
 const initialState = {
   user: null,
   isSignInPending: false,
+  errorMessage: null,
   isCreatingPlan: false,
 };
 
@@ -17,6 +18,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isSignInPending: false,
         user: action.user,
+        errorMessage: null,
       };
     case 'FETCH_OWN_USER_FAILED':
       return {
