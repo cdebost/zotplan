@@ -48,7 +48,7 @@ describeApiTest('user route', (request) => {
       });
   });
 
-  describe('creating plans', () => {
+  describe('plans', () => {
     it('can POST to /api/user/:id/plan to create a new plan', (done) => {
       request()
         .post('/api/user/id1/plan')
@@ -68,6 +68,26 @@ describeApiTest('user route', (request) => {
         .post('/api/user/id1/plan')
         .send({ name: 'A new plan', startYear: 2015 })
         .expect(400, done);
+    });
+
+    it('prevents creating more than 5 plans for one user', (done) => {
+      let successfulRequests = 0;
+      const requestCb = (err) => {
+        if (err) return done(err);
+        successfulRequests++;
+        if (successfulRequests >= 3) {
+          request()
+            .post('/api/user/id1/plan')
+            .send({ name: 'Plan 5', startYear: 2010 })
+            .expect(400, done);
+        }
+      };
+      for (let i = 0; i < 3; i++) {
+        request()
+          .post('/api/user/id1/plan')
+          .send({ name: `Plan ${i}`, startYear: 2010 })
+          .expect(200, requestCb);
+      }
     });
 
     it('initializes plans with an empty course collection of four years', (done) => {

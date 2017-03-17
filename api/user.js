@@ -40,8 +40,13 @@ export default () => {
 
   router.post('/:userId/plan', async (req, res) => {
     const { plans } = await User.findOne({ _id: req.session.userId }, { plans: 1 });
+    if (plans.length > 4) {
+      return res.status(400).send({
+        error: 'Cannot create more than 5 plans',
+      });
+    }
     if (plans.map(plan => plan.name).includes(req.body.name)) {
-      res.status(400).send({
+      return res.status(400).send({
         error: 'A plan with that name already exists',
       });
     }
