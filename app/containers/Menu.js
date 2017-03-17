@@ -157,6 +157,7 @@ class Menu extends React.Component {
                   key="new"
                   primaryText="Create a New Plan"
                   leftIcon={Menu.menuIcon('add')}
+                  style={{ display: (user.plans.length >= 5) ? 'none' : 'block' }}
                   onTouchTap={() => handleTapCreateNewPlan(user._id, 'New Plan', 2014)}
                 />,
                 <CreateNewPlanDialog
