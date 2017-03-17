@@ -1,4 +1,5 @@
 import express from 'express';
+import Mongoose from 'mongoose';
 import User from '../shared/models/user';
 
 /**
@@ -38,6 +39,12 @@ export default () => {
   });
 
   router.post('/:userId/plan', async (req, res) => {
+    const { plans } = await User.findOne({ _id: req.session.userId }, { plans: 1 });
+    if (plans.map(plan => plan.name).includes(req.body.name)) {
+      res.status(400).send({
+        error: 'A plan with that name already exists',
+      });
+    }
     try {
       const years = [];
       for (let i = 0; i < 4; i++) {
@@ -47,11 +54,18 @@ export default () => {
         }
         years.push({ quarters });
       }
-      const plan = { name: req.body.name, startYear: req.body.startYear, years };
+      const plan = {
+        _id: Mongoose.Types.ObjectId(),
+        name: req.body.name,
+        startYear: req.body.startYear,
+        years,
+      };
       await User.update({ _id: req.session.userId }, { $push: { plans: plan } });
       res.send(plan);
     } catch (err) {
-      res.sendStatus(400);
+      res.status(400).send({
+        error: err,
+      });
     }
   });
 

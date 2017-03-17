@@ -56,9 +56,18 @@ describeApiTest('user route', (request) => {
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
+          expect(res.body._id).to.not.be.undefined;
           expect(res.body.name).to.equal('A new plan');
+          expect(res.body.startYear).to.equal(2010);
           done();
         });
+    });
+
+    it('prevents creating a second plan with the same name for a single user', (done) => {
+      request()
+        .post('/api/user/id1/plan')
+        .send({ name: 'A new plan', startYear: 2015 })
+        .expect(400, done);
     });
 
     it('initializes plans with an empty course collection of four years', (done) => {
