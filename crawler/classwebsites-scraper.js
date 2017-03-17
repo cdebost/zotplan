@@ -67,6 +67,7 @@ const openTermPage = (quarter, deptName) => new Promise((resolve, reject) => {
         (`?dept_name=${deptName.replace(' ', '+')}`) : ''}`,
     form: { quarter: quarter.toString(), submit: 'Change Term' },
     headers: {
+      /* eslint max-len: 0 */
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
     },
   }, (err, res, body) => {
@@ -99,8 +100,8 @@ export default async function scrape(departments) {
   for (let i = 0; i < 4; i++) {
     for (const department of departments) {
       const $ = await openTermPage(quarter, department.name);
-      const cb = () => {
-        const courseName = $($(this).find('td')[1])
+      const cb = (j, elem) => {
+        const courseName = $($(elem).find('td')[1])
           .text()
           .trim()
           .replace(/ (LEC|DIS|LAB|SEM|TAP).*$/, '');

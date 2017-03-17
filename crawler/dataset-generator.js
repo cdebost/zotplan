@@ -6,7 +6,7 @@ export default function exportDataset({ departments, courses }) {
   startJob('Exporting datasets', departments.length + courses.length);
 
   const directoryPath = path.join(
-    __dirname, 'datasets', (new Date()).toString().replace(/ /g, '_'),
+    __dirname, 'datasets', (new Date()).toString().slice(4).replace(/ /g, '_'),
   );
   fs.mkdirSync(directoryPath);
 
