@@ -13,3 +13,11 @@ export const openSignOutDialog = () => ({
 export const closeSignOutDialog = () => ({
   type: 'CLOSE_SIGN_OUT_DIALOG',
 });
+
+export const openCreateNewPlanDialog = () => ({
+  type: 'OPEN_CREATE_NEW_PLAN_DIALOG',
+});
+
+export const closeCreateNewPlanDialog = () => ({
+  type: 'CLOSE_CREATE_NEW_PLAN_DIALOG',
+});

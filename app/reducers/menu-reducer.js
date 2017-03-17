@@ -1,6 +1,7 @@
 const initialState = {
   isVisible: false,
   isSignOutDialogVisible: false,
+  isCreateNewPlanDialogVisible: false,
 };
 
 export default function menuReducer(state = initialState, action) {
@@ -24,6 +25,16 @@ export default function menuReducer(state = initialState, action) {
       return {
         ...state,
         isSignOutDialogVisible: false,
+      };
+    case 'OPEN_CREATE_NEW_PLAN_DIALOG':
+      return {
+        ...state,
+        isCreateNewPlanDialogVisible: true,
+      };
+    case 'CLOSE_CREATE_NEW_PLAN_DIALOG':
+      return {
+        ...state,
+        isCreateNewPlanDialogVisible: false,
       };
     default:
       return state;

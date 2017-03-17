@@ -14,12 +14,16 @@ import {
   createNewPlan,
   openSignOutDialog,
   closeSignOutDialog,
+  openCreateNewPlanDialog,
+  closeCreateNewPlanDialog,
 } from '../actions';
 import PropTypes from '../validators';
+import CreateNewPlanDialog from '../components/CreateNewPlanDialog';
 
 const mapStateToProps = state => ({
   isVisible: state.menu.isVisible,
   isSignOutDialogVisible: state.menu.isSignOutDialogVisible,
+  isCreateNewPlanDialogVisible: state.menu.isCreateNewPlanDialogVisible,
   user: state.user.user,
 });
 
@@ -49,8 +53,15 @@ const mapDispatchToProps = dispatch => ({
     dispatch(closeMenu());
     dispatch(push(`/user/${user._id}/plan/${plan._id}`));
   },
-  handleTapCreateNewPlan: (userId, name, startYear) => {
-    dispatch(createNewPlan(userId, name, startYear));
+  handleTapCreateNewPlan: () => {
+    dispatch(openCreateNewPlanDialog());
+  },
+  handleCreateNewPlanCancel: () => {
+    dispatch(closeCreateNewPlanDialog());
+  },
+  handleCreateNewPlanConfirm: (user, planName, startYear) => {
+    dispatch(createNewPlan(user._id, planName, startYear));
+    dispatch(closeCreateNewPlanDialog());
   },
   handleTapSettings: () => {
     dispatch(closeMenu());
@@ -148,6 +159,14 @@ class Menu extends React.Component {
                   leftIcon={Menu.menuIcon('add')}
                   onTouchTap={() => handleTapCreateNewPlan(user._id, 'New Plan', 2014)}
                 />,
+                <CreateNewPlanDialog
+                  key="createnewplandialog"
+                  isVisible={this.props.isCreateNewPlanDialogVisible}
+                  onCancel={this.props.handleCreateNewPlanCancel}
+                  onConfirm={(planName, startYear) =>
+                    this.props.handleCreateNewPlanConfirm(user, planName, startYear)
+                  }
+                />,
               ])
             }
           />
@@ -175,7 +194,10 @@ Menu.propTypes = {
   user: PropTypes.user.isRequired,
   handleTapHome: React.PropTypes.func.isRequired,
   handleTapPlan: React.PropTypes.func.isRequired,
+  isCreateNewPlanDialogVisible: React.PropTypes.bool.isRequired,
   handleTapCreateNewPlan: React.PropTypes.func.isRequired,
+  handleCreateNewPlanCancel: React.PropTypes.func.isRequired,
+  handleCreateNewPlanConfirm: React.PropTypes.func.isRequired,
   handleTapSettings: React.PropTypes.func.isRequired,
 };
 
