@@ -67,7 +67,13 @@ describeApiTest('user route', (request) => {
       request()
         .post('/api/user/id1/plan')
         .send({ name: 'A new plan', startYear: 2015 })
-        .expect(400, done);
+        .end((err) => {
+          if (err) return done(err);
+          request()
+            .post('/api/user/id1/plan')
+            .send({ name: 'A new plan', startYear: 2015 })
+            .expect(400, done);
+        });
     });
 
     it('prevents creating more than 5 plans for one user', (done) => {
@@ -75,14 +81,14 @@ describeApiTest('user route', (request) => {
       const requestCb = (err) => {
         if (err) return done(err);
         successfulRequests++;
-        if (successfulRequests >= 3) {
+        if (successfulRequests >= 5) {
           request()
             .post('/api/user/id1/plan')
             .send({ name: 'Plan 5', startYear: 2010 })
             .expect(400, done);
         }
       };
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 5; i++) {
         request()
           .post('/api/user/id1/plan')
           .send({ name: `Plan ${i}`, startYear: 2010 })

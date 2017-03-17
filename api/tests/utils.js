@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 import request from 'supertest';
+import path from 'path';
+import { execSync } from 'child_process';
 import App from '../../app/app';
 import GoogleClientMock from './mocks/google-client-mock';
 
@@ -11,6 +13,15 @@ export function describeApiTest(name, tests, shouldSignIn = true) {
 
     beforeEach((done) => {
       process.env.NODE_ENV = 'test';
+      const collections = ['departments', 'courses', 'users', 'plans'];
+      collections.forEach(collec => execSync(
+        `mongoimport \
+          --db zotplan_test \
+          --collection ${collec} \
+          --drop \
+          --file ${path.join(__dirname, 'datasets', `${collec}.json`)} \
+          &> /dev/null`,
+      ));
       app = App({
         port: 36456,
         dbName: 'mongodb://localhost/zotplan_test',

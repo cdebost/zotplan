@@ -12,7 +12,7 @@
     "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
     "lint": "./node_modules/.bin/eslint . || true",
-    "test": "cd api && NODE_ENV=test ./test.sh",
+    "test": "ENVIRONMENT=test istanbul cover _mocha -- --reporter spec --compilers js:babel-register --require babel-polyfill --recursive ./api/tests",
     "crawler": "babel-node crawler"
   },
   "repository": {
