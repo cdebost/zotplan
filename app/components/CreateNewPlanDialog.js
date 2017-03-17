@@ -11,6 +11,7 @@ export default class CreateNewPlanDialog extends React.Component {
     isVisible: React.PropTypes.bool.isRequired,
     onCancel: React.PropTypes.func.isRequired,
     onConfirm: React.PropTypes.func.isRequired,
+    takenPlanNames: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   };
 
   constructor(props) {
@@ -23,10 +24,13 @@ export default class CreateNewPlanDialog extends React.Component {
     };
   }
 
+  reset = () => this.setState({ startYear: 2014, name: '' });
+
   handleNameChange = event => this.setState({ name: event.target.value });
   handleStartYearChange = (event, i, value) => this.setState({ startYear: value });
 
   render() {
+    const isCurrentPlanNameTaken = this.props.takenPlanNames.includes(this.state.name);
     return (
       <Dialog
         title="Create a New Plan"
@@ -35,12 +39,19 @@ export default class CreateNewPlanDialog extends React.Component {
           <FlatButton
             label="Cancel"
             primary
-            onTouchTap={this.props.onCancel}
+            onTouchTap={() => {
+              this.reset();
+              this.props.onCancel();
+            }}
           />,
           <FlatButton
             label="Create"
             secondary
-            onTouchTap={() => this.props.onConfirm(this.state.name, this.state.startYear)}
+            disabled={!this.state.name.length || isCurrentPlanNameTaken}
+            onTouchTap={() => {
+              this.reset();
+              this.props.onConfirm(this.state.name, this.state.startYear);
+            }}
           />,
         ]}
       >
@@ -48,6 +59,7 @@ export default class CreateNewPlanDialog extends React.Component {
           type="text"
           hintText="Plan Name"
           value={this.state.name}
+          errorText={isCurrentPlanNameTaken && 'A plan with that name already exists'}
           onChange={this.handleNameChange}
           style={{ width: '100%' }}
         />

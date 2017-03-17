@@ -162,6 +162,7 @@ class Menu extends React.Component {
                 <CreateNewPlanDialog
                   key="createnewplandialog"
                   isVisible={this.props.isCreateNewPlanDialogVisible}
+                  takenPlanNames={user.plans.map(p => p.name)}
                   onCancel={this.props.handleCreateNewPlanCancel}
                   onConfirm={(planName, startYear) =>
                     this.props.handleCreateNewPlanConfirm(user, planName, startYear)

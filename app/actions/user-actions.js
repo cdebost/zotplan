@@ -23,3 +23,13 @@ export const createNewPlan = (userId, name, startYear) => ({
   name,
   startYear,
 });
+
+export const createPlanSucceeded = plan => ({
+  type: 'CREATE_PLAN_SUCCEEDED',
+  plan,
+});
+
+export const createPlanFailed = error => ({
+  type: 'CREATE_PLAN_FAILED',
+  error,
+});

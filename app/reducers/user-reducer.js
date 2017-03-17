@@ -3,6 +3,7 @@ const initialState = {
   isSignInPending: false,
   errorMessage: null,
   isCreatingPlan: false,
+  planCreationError: null,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -47,10 +48,17 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         isCreatingPlan: false,
+        planCreationError: null,
         user: {
           ...state.user,
           plans: state.user.plans.concat([action.plan]),
         },
+      };
+    case 'CREATE_PLAN_FAILED':
+      return {
+        ...state,
+        isCreatingPlan: false,
+        planCreationError: action.error,
       };
     default:
       return state;

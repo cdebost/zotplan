@@ -32,7 +32,7 @@ function* createPlan(action) {
     const plan = yield call(Api.createPlan, action.userId, action.name, action.startYear);
     yield put({ type: 'CREATE_PLAN_SUCCEEDED', plan });
   } catch (e) {
-    yield put({ type: 'CREATE_PLAN_FAILED', message: JSON.stringify(e).message });
+    yield put({ type: 'CREATE_PLAN_FAILED', error: JSON.stringify(e).message });
   }
 }
 
