@@ -74,5 +74,17 @@ export default () => {
     }
   });
 
+  router.delete('/:userId/plan/:planId', async (req, res) => {
+    const { plans } = await User.findOne({ _id: req.session.userId }, { plans: 1 });
+    const newPlans = plans.filter(plan => String(plan._id) !== String(req.params.planId));
+    if (plans.length === newPlans.length) {
+      return res.status(400).send({
+        error: 'Plan not found',
+      });
+    }
+    await User.update({ _id: req.session.userId }, { plans: newPlans });
+    res.send({ });
+  });
+
   return router;
 };

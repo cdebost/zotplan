@@ -109,5 +109,35 @@ describeApiTest('user route', (request) => {
           done();
         });
     });
+
+    it('can delete plans', (done) => {
+      request()
+        .post('/api/user/id1/plan')
+        .send({ name: 'A New Plan', startYear: 2010 })
+        .expect(200)
+        .end((postErr, res) => {
+          if (postErr) return done(postErr);
+          const { _id } = res.body;
+          request()
+            .delete(`/api/user/id1/plan/${_id}`)
+            .expect(200)
+            .end((deleteErr) => {
+              if (deleteErr) return done(deleteErr);
+              request()
+                .get('/api/user/id1')
+                .end((err, userRes) => {
+                  if (err) return done(err);
+                  expect(userRes.body.plans.length).to.equal(1);
+                  done();
+                });
+            });
+        });
+    });
+
+    it('returns a 400 when deleting a plan that doesn\'t exist', (done) => {
+      request()
+        .delete('/api/user/id1/plan/ANonExistingPlanId')
+        .expect(400, done);
+    });
   });
 });
